@@ -88,5 +88,5 @@ test("rejects malformed nested data and incomplete metric pairs", () => {
 });
 test("rejects partial notes, placeholders and timeline precision", () => {
   for(const patch of [{body:[]},{tags:"Research"},{title:"Untitled note"},{date:null}]){const s=snapshot();Object.assign(s.notes[0],patch);assert.throws(()=>validateSnapshot(s));}
-  for(const patch of [{precision:"approximate"},{year:26},{countryCode:"egypt"},{date:null}]){const s=snapshot();s.timeline=[{id:"trip",title:"A trip",description:"A confirmed visit",kind:"Places",precision:"month",date:"2025-07",...patch}];assert.throws(()=>validateSnapshot(s));}
+  for(const patch of [{precision:"approximate"},{year:26},{countryCode:"egypt"},{countryCode:["EG"]},{date:null}]){const s=snapshot();s.timeline=[{id:"trip",title:"A trip",description:"A confirmed visit",kind:"Places",precision:"month",date:"2025-07",...patch}];assert.throws(()=>validateSnapshot(s));}
 });

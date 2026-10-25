@@ -1,73 +1,8 @@
 import { CalendarDays, MapPin } from 'lucide-react'
-import { cityById, countryById, journeyDays, shouldHideCityFromNavigation } from '../data/travelAtlas'
-import type { City, Country, CountryId, JourneyDay } from '../types/travel'
+import { cities, cityById, countries, countryById, journeyDays, shouldHideCityFromNavigation } from '../data/travelAtlas'
+import { buildJourneyEntries, groupJourneyEntriesByYear } from '../data/journeyChronology'
 
-type CountryYearGroup = {
-  country: Country
-  startDate: string
-  endDate: string
-  cities: City[]
-}
-
-type YearGroup = {
-  year: number
-  countries: CountryYearGroup[]
-}
-
-const getDayEndDate = (day: JourneyDay) => {
-  const city = cityById[day.cityId]
-  const record = city?.records?.find((item) => item.id === day.id)
-  return record?.end_date || record?.start_date || day.date
-}
-
-const buildYearGroups = (): YearGroup[] => {
-  const orderedDays = [...journeyDays].sort((a, b) =>
-    `${a.date}-${a.id}`.localeCompare(`${b.date}-${b.id}`),
-  )
-  const groups = new Map<number, Map<CountryId, { days: JourneyDay[]; cityIds: Set<string> }>>()
-
-  orderedDays.forEach((day) => {
-    if (!day.countryId) return
-    const year = Number(day.date.slice(0, 4))
-    if (!Number.isFinite(year)) return
-
-    const countriesForYear = groups.get(year) ?? new Map()
-    const countryGroup = countriesForYear.get(day.countryId) ?? {
-      days: [],
-      cityIds: new Set<string>(),
-    }
-
-    countryGroup.days.push(day)
-    countryGroup.cityIds.add(day.cityId)
-    countriesForYear.set(day.countryId, countryGroup)
-    groups.set(year, countriesForYear)
-  })
-
-  return [...groups.entries()]
-    .map(([year, countriesForYear]) => ({
-      year,
-      countries: [...countriesForYear.entries()]
-        .map(([countryId, group]) => {
-          const country = countryById[countryId]
-          const endDates = group.days.map(getDayEndDate).sort()
-
-          return {
-            country,
-            startDate: group.days[0]?.date ?? `${year}`,
-            endDate: endDates[endDates.length - 1] ?? group.days[0]?.date ?? `${year}`,
-            cities: country.cityIds
-              .filter((cityId) => group.cityIds.has(cityId))
-              .map((cityId) => cityById[cityId])
-              .filter((city) => Boolean(city) && !shouldHideCityFromNavigation(city)),
-          }
-        })
-        .filter((group): group is CountryYearGroup => Boolean(group.country))
-        .sort((a, b) => a.startDate.localeCompare(b.startDate)),
-    }))
-    .sort((a, b) => b.year - a.year)
-}
-
-const yearGroups = buildYearGroups()
+const yearGroups = groupJourneyEntriesByYear(buildJourneyEntries(countries, cities, journeyDays))
 
 export function JourneyYearCards() {
   return (
@@ -91,7 +26,7 @@ export function JourneyYearCards() {
 
             <div className="selector-scrollbar flex snap-x gap-4 overflow-x-auto pb-3">
               {yearGroup.countries.map((countryGroup) => {
-                const { country } = countryGroup
+                const country = countryById[countryGroup.countryId]
                 const dateRange = countryGroup.startDate === countryGroup.endDate
                   ? countryGroup.startDate
                   : `${countryGroup.startDate} - ${countryGroup.endDate}`
@@ -132,7 +67,8 @@ export function JourneyYearCards() {
                     <p className="mt-4 text-xs font-medium text-slate-400">{dateRange}</p>
 
                     <div className="mt-5 space-y-2">
-                      {countryGroup.cities.map((city) => (
+                      {countryGroup.countryVisits.map((visit) => <p key={visit.id} className="text-sm leading-5 text-slate-700">Country-level visit{country.memory ? ` · ${country.memory}` : ''}</p>)}
+                      {countryGroup.cityIds.map((cityId) => cityById[cityId]).filter((city) => city && !shouldHideCityFromNavigation(city)).map((city) => (
                         <div
                           key={city.id}
                           className="flex items-start gap-2.5 text-sm leading-5 text-slate-700"

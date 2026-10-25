@@ -1,18 +1,19 @@
 import { ArrowUpRight, Clock3, MapPin, Sparkles } from 'lucide-react'
-import { cityById, countryById, journeyDays } from '../data/travelAtlas'
-import type { CityId, JourneyDay } from '../types/travel'
+import { cities, cityById, countries, countryById, journeyDays } from '../data/travelAtlas'
+import { buildJourneyEntries } from '../data/journeyChronology'
+import type { CityId, CountryId, JourneyDay } from '../types/travel'
 
 type TimelineProps = {
   selectedDayId: string
+  selectedCountryId?: CountryId
+  onSelectCountry: (countryId: CountryId) => void
   onSelectDay: (day: JourneyDay) => void
   onHoverCity: (cityId?: CityId) => void
 }
 
-const orderedDays = [...journeyDays].sort((left, right) =>
-  `${right.date}-${right.id}`.localeCompare(`${left.date}-${left.id}`),
-)
+const orderedEntries = buildJourneyEntries(countries, cities, journeyDays)
 
-export function Timeline({ selectedDayId, onSelectDay, onHoverCity }: TimelineProps) {
+export function Timeline({ selectedDayId, selectedCountryId, onSelectDay, onSelectCountry, onHoverCity }: TimelineProps) {
   return (
     <section id="stories" className="journey-view-section journey-timeline-section">
       <div className="journey-section-heading">
@@ -27,17 +28,16 @@ export function Timeline({ selectedDayId, onSelectDay, onHoverCity }: TimelinePr
       </div>
 
       <div className="journey-timeline-rail">
-        {orderedDays.map((day, index) => {
-          const city = cityById[day.cityId]
-          const country = day.countryId ? countryById[day.countryId] : undefined
-          if (!city || !country) return null
-
-          const isSelected = day.id === selectedDayId
-          const year = day.date.slice(0, 4)
-          const showYear = index === 0 || orderedDays[index - 1]?.date.slice(0, 4) !== year
+        {orderedEntries.map((entry, index) => {
+          const day = entry.kind === 'city' ? entry.day : undefined
+          const city = day ? cityById[day.cityId] : undefined
+          const country = countryById[entry.countryId]
+          const isSelected = day ? day.id === selectedDayId : country.id === selectedCountryId
+          const year = entry.date.slice(0, 4)
+          const showYear = index === 0 || orderedEntries[index - 1]?.date.slice(0, 4) !== year
 
           return (
-            <article key={day.id} className="journey-timeline-entry">
+            <article key={entry.id} className="journey-timeline-entry">
               {showYear ? <div className="journey-year-marker">{year}</div> : null}
               <span
                 aria-hidden="true"
@@ -49,12 +49,12 @@ export function Timeline({ selectedDayId, onSelectDay, onHoverCity }: TimelinePr
                 className="journey-timeline-card journey-timeline-card-compact"
                 data-selected={isSelected}
                 style={{ '--journey-accent': country.accent } as React.CSSProperties}
-                onClick={() => onSelectDay(day)}
-                onMouseEnter={() => onHoverCity(day.cityId)}
+                onClick={() => day ? onSelectDay(day) : onSelectCountry(country.id)}
+                onMouseEnter={() => onHoverCity(day?.cityId)}
                 onMouseLeave={() => onHoverCity(undefined)}
               >
                 <span className="journey-timeline-date">
-                  <span>{day.date}</span>
+                  <span>{entry.date}</span>
                   {import.meta.env.MODE !== 'public' ? <span>{country.flagCode?.toUpperCase()}</span> : country.flagCode ? (
                     <span className="journey-timeline-flag" aria-hidden="true">
                       <img
@@ -70,12 +70,11 @@ export function Timeline({ selectedDayId, onSelectDay, onHoverCity }: TimelinePr
                 <span className="journey-timeline-copy">
                   <span className="journey-timeline-place">
                     <MapPin aria-hidden="true" />
-                    <strong>{city.nameZh}</strong>
-                    <span>{city.nameEn}</span>
+                    <strong>{city ? city.nameZh : country.nameEn}</strong>
+                    <span>{city ? city.nameEn : country.nameZh}</span>
                   </span>
                   <span className="journey-timeline-country-line">
-                    <strong>{country.nameZh}</strong>
-                    <span>{country.nameEn}</span>
+                    {city ? <><strong>{country.nameZh}</strong><span>{country.nameEn}</span></> : <span>Country-level visit</span>}
                   </span>
                 </span>
 

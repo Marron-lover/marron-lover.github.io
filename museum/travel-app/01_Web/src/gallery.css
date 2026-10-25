@@ -371,3 +371,27 @@
 .museum-travel .atlas-app-header[data-page="map"] .gallery-fixture-banner{position:absolute;top:100%;left:50%;transform:translateX(-50%);z-index:55;background:#dce8ff;color:#202126;padding:12px 20px;max-width:700px;width:90%;font-size:13px;line-height:1.5;text-align:center;border-radius:5px}
 
 .museum-travel .gallery-trip-stories{padding:10px 0 20px;display:grid;gap:14px}.museum-travel .gallery-trip-stories h3{font-size:17px;font-weight:500;margin:0}.museum-travel .gallery-trip-stories h4{font-size:14px;font-weight:500;margin:0 0 8px}.museum-travel .gallery-trip-stories p{font-size:14px;line-height:1.65;white-space:pre-wrap;margin:0;color:#202126}
+
+/* Journey shares the Gallery's light surface and ink tokens. */
+.museum-travel .atlas-journey-stage {color:#202126;}
+.museum-travel .atlas-journey-stage .journey-command-panel,
+.museum-travel .atlas-journey-stage .journey-timeline-section,
+.museum-travel .atlas-journey-stage .journey-year-group,
+.museum-travel .atlas-journey-stage .journey-country-card {
+  background:#fff;border-color:#e7e8eb;box-shadow:none;backdrop-filter:none;
+}
+.museum-travel .atlas-journey-stage .journey-country-card:hover {background:#eef1f5;box-shadow:none;}
+.museum-travel .atlas-journey-stage :is(.journey-command-copy h2,.journey-section-heading h2,.journey-stat-value,.journey-year-marker,.journey-timeline-place strong,.journey-timeline-country-line strong,.journey-year-group h3,.journey-country-card h4,.text-slate-950) {color:#202126;}
+.museum-travel .atlas-journey-stage :is(.journey-command-copy > p:last-child,.journey-order-note,.journey-stat-label,.journey-timeline-date,.journey-timeline-place,.journey-timeline-country-line,.journey-timeline-country-line span,.journey-public-note,.text-slate-700,.text-slate-500,.text-slate-400) {color:#656872;}
+.museum-travel .atlas-journey-stage :is(.journey-kicker,.journey-order-note svg,.journey-timeline-place svg,.journey-public-note svg) {color:#247beb;}
+.museum-travel .atlas-journey-stage .journey-stats-grid,.museum-travel .atlas-journey-stage .journey-section-heading {border-color:#e7e8eb;}
+.museum-travel .atlas-journey-stage .journey-stat-card {background:#eef1f5;border:0;box-shadow:none;}
+.museum-travel .atlas-journey-stage .journey-view-toggle {background:#eef1f5;border:0;box-shadow:none;}
+.museum-travel .atlas-journey-stage .journey-view-toggle button {color:#202126;min-height:44px;}
+.museum-travel .atlas-journey-stage .journey-view-toggle button[aria-pressed='true'] {background:#3d91f7;color:white;box-shadow:none;}
+.museum-travel .atlas-journey-stage .journey-timeline-card {background:#eef1f5;border-color:#e7e8eb;color:#202126;box-shadow:none;backdrop-filter:none;}
+.museum-travel .atlas-journey-stage .journey-timeline-card:is(:hover,[data-selected='true']) {background:#e4efff;border-color:#9cc4fa;box-shadow:none;}
+.museum-travel .atlas-journey-stage .journey-timeline-card-compact :is(.journey-timeline-place strong,.journey-timeline-place > span) {color:#202126;}
+.museum-travel .atlas-journey-stage .journey-timeline-card-compact .journey-timeline-country-line {opacity:1;}
+.museum-travel .atlas-journey-stage .journey-timeline-card-compact .journey-timeline-country-line :is(strong,span) {color:#656872;}
+.museum-travel .atlas-journey-stage .journey-timeline-open {background:white;border-color:#e7e8eb;color:#247beb;}

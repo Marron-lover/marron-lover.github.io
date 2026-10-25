@@ -246,10 +246,10 @@ export function CountrySelector({
       <div className="atlas-country-panel-heading mb-4 flex items-end justify-between gap-3">
         <div className="atlas-panel-body">
           <p className="text-xs font-semibold uppercase tracking-[0.24em] text-white">
-            Country Maps
+            {import.meta.env.MODE === 'approved' ? 'Reviewed places' : 'Country Maps'}
           </p>
           <h2 className="mt-1 text-xl font-semibold tracking-normal text-slate-950">
-            国家足迹
+            {import.meta.env.MODE === 'approved' ? 'Countries' : '国家足迹'}
           </h2>
         </div>
         {localEditorAvailable ? (

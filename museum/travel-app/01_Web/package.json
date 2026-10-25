@@ -18,7 +18,7 @@
     "preview": "vite preview",
     "build:approved": "tsc -b && vite build --mode approved && node scripts/finalize-approved.mjs",
     "dev:approved": "vite --mode approved --host 127.0.0.1 --port 5173 --strictPort",
-    "test:publication": "node --test scripts/approved-content.test.mjs",
+    "test:publication": "node --experimental-strip-types --test scripts/approved-content.test.mjs scripts/journey-chronology.test.mjs",
     "sync:approved": "node scripts/sync-approved.mjs",
     "fixture": "node scripts/build-local-fixture.mjs"
   },

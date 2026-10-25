@@ -220,10 +220,10 @@ function App() {
 
   const atlasStats = useMemo(
     () => [
-      { value: `${countries.length}`, label: 'Countries / 国家' },
-      { value: `${cities.length}`, label: 'Cities / 城市' },
-      { value: `${travelAtlasMeta.totalRecords}`, label: 'Records / 行程' },
-      { value: `${travelAtlasMeta.recordsWithCoordinates}`, label: 'Mapped / 坐标' },
+      { value: `${countries.length}`, label: import.meta.env.MODE === 'approved' ? 'Countries' : 'Countries / 国家' },
+      { value: `${cities.length}`, label: import.meta.env.MODE === 'approved' ? 'Cities' : 'Cities / 城市' },
+      { value: `${travelAtlasMeta.totalRecords}`, label: import.meta.env.MODE === 'approved' ? 'City records' : 'Records / 行程' },
+      { value: `${travelAtlasMeta.recordsWithCoordinates}`, label: import.meta.env.MODE === 'approved' ? 'Mapped cities' : 'Mapped / 坐标' },
     ],
     [],
   )
@@ -500,7 +500,7 @@ function App() {
                     <p className="journey-kicker">Travel chronology</p>
                     <h2>Places, in the order they became memories.</h2>
                     <p>
-                      A living index of visited cities, arranged from the newest journey backwards.
+                      A living index of visited countries and cities, arranged from the newest journey backwards.
                     </p>
                   </div>
 
@@ -521,6 +521,8 @@ function App() {
                 {journeyViewMode === 'timeline' ? (
                   <Timeline
                     selectedDayId={selectedDayId}
+                    selectedCountryId={selectedCountryId}
+                    onSelectCountry={selectCountry}
                     onSelectDay={selectDay}
                     onHoverCity={setHoverCityId}
                   />

@@ -74,7 +74,7 @@ function ready(item, group) {
     if ("date" in item) requireText(item.date,"timeline.date");
     if ("year" in item && (!Number.isInteger(item.year) || item.year < 1000 || item.year > 9999)) throw new Error("Timeline year must contain four digits.");
     if (!item.date && !item.year) throw new Error("Timeline date or year required.");
-    if ("countryCode" in item && !/^[A-Z]{2}$/.test(item.countryCode)) throw new Error("Valid country code required.");
+    if ("countryCode" in item && (typeof item.countryCode !== "string" || !/^[A-Z]{2}$/.test(item.countryCode))) throw new Error("Valid country code required.");
     if ("projectSlug" in item && (typeof item.projectSlug !== "string" || !identifier.test(item.projectSlug))) throw new Error("Valid timeline project slug required.");
     if ("sourceNote" in item) requireText(item.sourceNote,"timeline.sourceNote");
   }
