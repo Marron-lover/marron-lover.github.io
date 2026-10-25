@@ -1,3 +1,5 @@
 Yinan Feng personal website
 
-Serve this folder as the root of a static website. Root-relative asset URLs expect a domain root. This folder contains professional portfolio content, the selected one-page resume, locally bundled font/animation assets and their licenses. It contains no database, email, visa evidence, tokens, application records or private source repository links. Atlas Careers remains a separate authenticated local service.
+Public content: professional portfolio, contact email, one-page resume, Atlas app information, privacy/use pages, and licensed frontend assets. The private Atlas workspace, Gmail records, work-rights evidence and credentials remain in the Mac installation.
+
+Serve this static folder from a domain root. Current public site: https://marron-lover.github.io/
