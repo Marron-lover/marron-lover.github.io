@@ -1,0 +1,6 @@
+.DS_Store
+museum/node_modules/
+museum/dist/
+museum/art-source/
+museum/references/
+museum/qa/
