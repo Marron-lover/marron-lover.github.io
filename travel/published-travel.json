@@ -1,0 +1,44 @@
+{
+  "schemaVersion": 1,
+  "visibility": "public",
+  "reviewed": true,
+  "travelMap": {
+    "schema_version": 1,
+    "generated_at": "2026-10-25",
+    "privacy_level": "reviewed-public",
+    "records": []
+  },
+  "editorState": {
+    "schemaVersion": 1,
+    "addedCountries": [
+      {
+        "id": "egypt",
+        "nameZh": "埃及",
+        "nameEn": "Egypt",
+        "countryCode": "EG",
+        "centerLat": 27,
+        "centerLng": 30,
+        "region": "Africa",
+        "visitedDate": "2025-07",
+        "status": "visited",
+        "story": ""
+      }
+    ],
+    "countryOrder": [
+      "egypt"
+    ],
+    "hiddenCountryIds": [],
+    "cityOrderByCountry": {},
+    "hiddenCityIds": [],
+    "mediaOrderByCity": {},
+    "hiddenMediaIds": [],
+    "coverMediaByCity": {},
+    "droneOrderByCity": {},
+    "hiddenDroneMediaIds": []
+  },
+  "mediaCatalog": {
+    "schemaVersion": 2,
+    "items": []
+  },
+  "wishlist": []
+}

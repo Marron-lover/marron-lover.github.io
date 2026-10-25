@@ -1,0 +1,128 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE svg
+  PUBLIC '-//W3C//DTD SVG 1.0//EN'
+  'http://www.w3.org/TR/2001/REC-SVG-20010904/DTD/svg10.dtd'>
+<svg width="1000" height="460" preserveAspectRatio="xMinYMin meet" viewBox="0 0 1000 460" xmlns="http://www.w3.org/2000/svg" version="1.0" fill-rule="evenodd" xmlns:xlink="http://www.w3.org/1999/xlink">
+	<title>...</title>
+	<desc>...</desc>
+	<clipPath id="clip">
+		<rect x="0" y="0" width="1000" height="460"/>
+	</clipPath>
+	<g id="group" transform="scale(1,-1) translate(0,-460)" style="clip-path: url(#clip)">
+		<g transform="">
+			<rect x="0" y="0" width="1000" height="460" style="stroke: none; stroke-linecap: butt; stroke-width: 1; fill: rgb(97%,97%,97%); fill-rule: evenodd;"/>
+			<text x="55" y="410" style="font-family: Helvetica; font-size: 25px;fill: rgb(12%,12%,14%); stroke:none;" transform="translate(0,820) scale(1,-1)">Same predictions, different postprocessing</text>
+			<text x="55" y="381" style="font-family: Helvetica; font-size: 12px;fill: rgb(39%,40%,44%); stroke:none;" transform="translate(0,762) scale(1,-1)">Frozen 56-case CT evaluation / pancreas + tumour foreground / retrospective research</text>
+			<g transform="">
+				<g transform="">
+					<rect x="128.2608695652174" y="110.0" width="106.52173913043478" height="163.83000000000004" style="stroke: none; stroke-linecap: butt; stroke-width: 1; fill: rgb(63%,65%,70%); fill-rule: evenodd;"/>
+					<rect x="265.21739130434787" y="110.0" width="106.52173913043481" height="167.0765" style="stroke: none; stroke-linecap: butt; stroke-width: 1; fill: rgb(23%,56%,96%); fill-rule: evenodd;"/>
+					<g transform=""/>
+				</g>
+				<g transform="">
+					<g transform="">
+						<path d="M 75,110 L 425,110 Z" style="stroke: rgb(72%,75%,79%); stroke-linecap: butt; stroke-width: 1;"/>
+					</g>
+					<g transform="">
+						<path d="M 75,110 L 75,105 Z" style="stroke: rgb(72%,75%,79%); stroke-linecap: butt; stroke-width: 1;"/>
+						<path d="M 425,110 L 425,105 Z" style="stroke: rgb(72%,75%,79%); stroke-linecap: butt; stroke-width: 1;"/>
+					</g>
+					<g transform="">
+						<g transform=" matrix(1,0,0,1,250,105)">
+							<text x="-30.8715" y="-11.0" style="font-family: Helvetica; font-size: 11px;fill: rgb(0%,0%,0%); stroke:none;" transform="translate(0,-22) scale(1,-1)">56 CT cases</text>
+						</g>
+					</g>
+				</g>
+				<g transform="">
+					<g transform="">
+						<path d="M 75,110 L 75,325 Z" style="stroke: rgb(72%,75%,79%); stroke-linecap: butt; stroke-width: 1;"/>
+					</g>
+					<g transform="">
+						<path d="M 75,110 L 70,110 Z" style="stroke: rgb(72%,75%,79%); stroke-linecap: butt; stroke-width: 1;"/>
+						<path d="M 75,153 L 70,153 Z" style="stroke: rgb(72%,75%,79%); stroke-linecap: butt; stroke-width: 1;"/>
+						<path d="M 75,196 L 70,196 Z" style="stroke: rgb(72%,75%,79%); stroke-linecap: butt; stroke-width: 1;"/>
+						<path d="M 75,239 L 70,239 Z" style="stroke: rgb(72%,75%,79%); stroke-linecap: butt; stroke-width: 1;"/>
+						<path d="M 75,282 L 70,282 Z" style="stroke: rgb(72%,75%,79%); stroke-linecap: butt; stroke-width: 1;"/>
+						<path d="M 75,325 L 70,325 Z" style="stroke: rgb(72%,75%,79%); stroke-linecap: butt; stroke-width: 1;"/>
+					</g>
+					<g transform="">
+						<g transform=" matrix(1,0,0,1,70,110)">
+							<text x="-5.5600000000000005" y="-4.0" style="font-family: Helvetica; font-size: 10px;fill: rgb(0%,0%,0%); stroke:none;" transform="translate(0,-8) scale(1,-1)">0</text>
+						</g>
+						<g transform=" matrix(1,0,0,1,70,153)">
+							<text x="-13.900000000000002" y="-4.0" style="font-family: Helvetica; font-size: 10px;fill: rgb(0%,0%,0%); stroke:none;" transform="translate(0,-8) scale(1,-1)">0.2</text>
+						</g>
+						<g transform=" matrix(1,0,0,1,70,196)">
+							<text x="-13.900000000000002" y="-4.0" style="font-family: Helvetica; font-size: 10px;fill: rgb(0%,0%,0%); stroke:none;" transform="translate(0,-8) scale(1,-1)">0.4</text>
+						</g>
+						<g transform=" matrix(1,0,0,1,70,239)">
+							<text x="-13.900000000000002" y="-4.0" style="font-family: Helvetica; font-size: 10px;fill: rgb(0%,0%,0%); stroke:none;" transform="translate(0,-8) scale(1,-1)">0.6</text>
+						</g>
+						<g transform=" matrix(1,0,0,1,70,282)">
+							<text x="-13.900000000000002" y="-4.0" style="font-family: Helvetica; font-size: 10px;fill: rgb(0%,0%,0%); stroke:none;" transform="translate(0,-8) scale(1,-1)">0.8</text>
+						</g>
+						<g transform=" matrix(1,0,0,1,70,325)">
+							<text x="-5.5600000000000005" y="-4.0" style="font-family: Helvetica; font-size: 10px;fill: rgb(0%,0%,0%); stroke:none;" transform="translate(0,-8) scale(1,-1)">1</text>
+						</g>
+					</g>
+				</g>
+			</g>
+			<text x="75" y="348" style="font-family: Helvetica; font-size: 16px;fill: rgb(12%,12%,14%); stroke:none;" transform="translate(0,696) scale(1,-1)">Dice - higher is better</text>
+			<text x="75" y="66" style="font-family: Helvetica; font-size: 12px;fill: rgb(39%,40%,44%); stroke:none;" transform="translate(0,132) scale(1,-1)">Raw prediction: 0.7620</text>
+			<text x="75" y="46" style="font-family: Helvetica; font-size: 12px;fill: rgb(14%,48%,92%); stroke:none;" transform="translate(0,92) scale(1,-1)">Soft Attachment: 0.7771</text>
+			<g transform="">
+				<g transform="">
+					<rect x="608.2608695652174" y="110.0" width="106.52173913043475" height="193.8225" style="stroke: none; stroke-linecap: butt; stroke-width: 1; fill: rgb(63%,65%,70%); fill-rule: evenodd;"/>
+					<rect x="745.2173913043479" y="110.0" width="106.52173913043475" height="71.64875" style="stroke: none; stroke-linecap: butt; stroke-width: 1; fill: rgb(23%,56%,96%); fill-rule: evenodd;"/>
+					<g transform=""/>
+				</g>
+				<g transform="">
+					<g transform="">
+						<path d="M 555,110 L 905,110 Z" style="stroke: rgb(72%,75%,79%); stroke-linecap: butt; stroke-width: 1;"/>
+					</g>
+					<g transform="">
+						<path d="M 555,110 L 555,105 Z" style="stroke: rgb(72%,75%,79%); stroke-linecap: butt; stroke-width: 1;"/>
+						<path d="M 905,110 L 905,105 Z" style="stroke: rgb(72%,75%,79%); stroke-linecap: butt; stroke-width: 1;"/>
+					</g>
+					<g transform="">
+						<g transform=" matrix(1,0,0,1,730,105)">
+							<text x="-30.8715" y="-11.0" style="font-family: Helvetica; font-size: 11px;fill: rgb(0%,0%,0%); stroke:none;" transform="translate(0,-22) scale(1,-1)">56 CT cases</text>
+						</g>
+					</g>
+				</g>
+				<g transform="">
+					<g transform="">
+						<path d="M 555,110 L 555,325 Z" style="stroke: rgb(72%,75%,79%); stroke-linecap: butt; stroke-width: 1;"/>
+					</g>
+					<g transform="">
+						<path d="M 555,110 L 550,110 Z" style="stroke: rgb(72%,75%,79%); stroke-linecap: butt; stroke-width: 1;"/>
+						<path d="M 555,163.75 L 550,163.75 Z" style="stroke: rgb(72%,75%,79%); stroke-linecap: butt; stroke-width: 1;"/>
+						<path d="M 555,217.5 L 550,217.5 Z" style="stroke: rgb(72%,75%,79%); stroke-linecap: butt; stroke-width: 1;"/>
+						<path d="M 555,271.25 L 550,271.25 Z" style="stroke: rgb(72%,75%,79%); stroke-linecap: butt; stroke-width: 1;"/>
+						<path d="M 555,325 L 550,325 Z" style="stroke: rgb(72%,75%,79%); stroke-linecap: butt; stroke-width: 1;"/>
+					</g>
+					<g transform="">
+						<g transform=" matrix(1,0,0,1,550,110)">
+							<text x="-5.5600000000000005" y="-4.0" style="font-family: Helvetica; font-size: 10px;fill: rgb(0%,0%,0%); stroke:none;" transform="translate(0,-8) scale(1,-1)">0</text>
+						</g>
+						<g transform=" matrix(1,0,0,1,550,163.75)">
+							<text x="-11.120000000000001" y="-4.0" style="font-family: Helvetica; font-size: 10px;fill: rgb(0%,0%,0%); stroke:none;" transform="translate(0,-8) scale(1,-1)">10</text>
+						</g>
+						<g transform=" matrix(1,0,0,1,550,217.5)">
+							<text x="-11.120000000000001" y="-4.0" style="font-family: Helvetica; font-size: 10px;fill: rgb(0%,0%,0%); stroke:none;" transform="translate(0,-8) scale(1,-1)">20</text>
+						</g>
+						<g transform=" matrix(1,0,0,1,550,271.25)">
+							<text x="-11.120000000000001" y="-4.0" style="font-family: Helvetica; font-size: 10px;fill: rgb(0%,0%,0%); stroke:none;" transform="translate(0,-8) scale(1,-1)">30</text>
+						</g>
+						<g transform=" matrix(1,0,0,1,550,325)">
+							<text x="-11.120000000000001" y="-4.0" style="font-family: Helvetica; font-size: 10px;fill: rgb(0%,0%,0%); stroke:none;" transform="translate(0,-8) scale(1,-1)">40</text>
+						</g>
+					</g>
+				</g>
+			</g>
+			<text x="555" y="348" style="font-family: Helvetica; font-size: 16px;fill: rgb(12%,12%,14%); stroke:none;" transform="translate(0,696) scale(1,-1)">HD95 (mm) - lower is better</text>
+			<text x="555" y="66" style="font-family: Helvetica; font-size: 12px;fill: rgb(39%,40%,44%); stroke:none;" transform="translate(0,132) scale(1,-1)">Raw prediction: 36.06</text>
+			<text x="555" y="46" style="font-family: Helvetica; font-size: 12px;fill: rgb(14%,48%,92%); stroke:none;" transform="translate(0,92) scale(1,-1)">Soft Attachment: 13.33</text>
+		</g>
+	</g>
+</svg>
