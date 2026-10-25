@@ -1,0 +1,19 @@
+{
+  "name": "gallery-travel-room",
+  "private": true,
+  "version": "0.3.2-gallery",
+  "type": "module",
+  "scripts": {
+    "setup": "npm --prefix 01_Web ci",
+    "dev:personal": "npm --prefix 01_Web run dev:personal",
+    "dev:public": "npm --prefix 01_Web run dev:public",
+    "build:approved": "node build-gallery.mjs",
+    "sync:approved": "npm --prefix 01_Web run sync:approved --",
+    "test:publication": "npm --prefix 01_Web run test:publication",
+    "lint": "npm --prefix 01_Web run lint",
+    "privacy:check": "npm --prefix 01_Web run privacy:check",
+    "fixture": "npm --prefix 01_Web run fixture",
+    "release:check": "node release-gallery.mjs",
+    "build:public": "npm --prefix 01_Web run build:public"
+  }
+}

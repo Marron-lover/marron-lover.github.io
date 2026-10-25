@@ -1,40 +1,18 @@
-import { execFileSync } from "node:child_process";
-import { cpSync, existsSync, writeFileSync } from "node:fs";
-import { fileURLToPath } from "node:url";
-import { dirname, resolve } from "node:path";
-const museum = resolve(dirname(fileURLToPath(import.meta.url)), "..");
-const destination = resolve(museum, "..");
-if (!existsSync(resolve(destination, ".git")))
-  throw new Error(
-    "Run this script from the museum source inside the personal site Git checkout.",
-  );
-execFileSync("npm", ["run", "build"], { cwd: museum, stdio: "inherit" });
-const entries = [
-  "assets",
-  "explore",
-  "about",
-  "contact",
-  "exhibit",
-  "index.html",
-  "404.html",
-  "icon.svg",
-  "resume.pdf",
-  "atlas.html",
-  "privacy.html",
-  "terms.html",
-  "portfolio.css",
-  "vendor",
-  "robots.txt",
-];
-for (const entry of entries) {
-  const source = resolve(museum, "dist", entry);
-  if (!existsSync(source)) throw new Error("Missing build output: " + entry);
-}
-for (const entry of entries)
-  cpSync(resolve(museum, "dist", entry), resolve(destination, entry), {
-    recursive: true,
-  });
-writeFileSync(resolve(destination, ".nojekyll"), "");
-console.log(
-  "GitHub Pages files prepared. Review git diff, commit, and push to publish.",
-);
+import {execFileSync} from 'node:child_process';
+import {cpSync,existsSync,rmSync,writeFileSync} from 'node:fs';
+import {fileURLToPath} from 'node:url';
+import {dirname,resolve} from 'node:path';
+import {publishStatic} from './static-publish.mjs';
+const museum=resolve(dirname(fileURLToPath(import.meta.url)),'..');
+const destination=resolve(museum,'..');
+if(!existsSync(resolve(destination,'.git')))throw new Error('Use the museum source inside the personal-site Git checkout.');
+execFileSync('npm',['run','build'],{cwd:museum,stdio:'inherit'});
+const travel=resolve(museum,'travel-app');
+execFileSync('npm',['run','build:approved'],{cwd:travel,stdio:'inherit',env:{...process.env,STARMAP_APPROVED_ROOT:resolve(travel,'01_Web/approved-public'),VITE_CESIUM_ION_TOKEN:''}});
+const approvedTravel=resolve(travel,'dist');
+if(!existsSync(resolve(approvedTravel,'index.html')))throw new Error('The reviewed travel build is missing.');
+const travelTarget=resolve(museum,'dist/travel');rmSync(travelTarget,{recursive:true,force:true});cpSync(approvedTravel,travelTarget,{recursive:true});
+const entries=['assets','media','explore','about','contact','exhibit','work','world','notes','timeline','travel','index.html','404.html','icon.svg','resume.pdf','atlas.html','privacy.html','terms.html','portfolio.css','vendor','robots.txt'];
+publishStatic(resolve(museum,'dist'),destination,entries);
+writeFileSync(resolve(destination,'.nojekyll'),'');
+console.log('Reviewed Gallery and travel builds prepared. Generated directories replaced exactly; unrelated source and private data retained. Review Git diff before publication.');

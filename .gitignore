@@ -11,3 +11,9 @@ portfolio-research/
 museum/.taste-skill/
 museum/travel-app/node_modules/
 museum/travel-app/dist/
+
+**/node_modules/
+museum/travel-app/dist/
+museum/travel-app/01_Web/dist/
+museum/travel-app/01_Web/.travelatlas-private/
+.gallery-publish-*/
