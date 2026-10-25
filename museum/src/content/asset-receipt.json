@@ -1,0 +1,37 @@
+{
+  "schemaVersion": 1,
+  "assets": [
+    {
+      "src": "/media/approved/atlas-editorial-interface.webp",
+      "sha256": "8d4e668fc3df2a88ffe78b82c17cb1d6b12aacb630f5fa382428d38b15137467",
+      "bytes": 81668,
+      "reviewed": true,
+      "rights": "owner-approved",
+      "description": "Owned software interface containing reviewed public copy, original gallery artwork, or a source-backed aggregate research chart."
+    },
+    {
+      "src": "/media/approved/panseg-aggregate.svg",
+      "sha256": "056faf2808c6920cd327001321790c92a671ba18be7a94c4cfc5b260871eb810",
+      "bytes": 8954,
+      "reviewed": true,
+      "rights": "owner-approved",
+      "description": "Owned software interface containing reviewed public copy, original gallery artwork, or a source-backed aggregate research chart."
+    },
+    {
+      "src": "/media/approved/travel-studio-interface.webp",
+      "sha256": "5a9ef3c6e1d7e077d3991a035eb68bcdb5bf3220d8f33b15d35d4a7d417c7f13",
+      "bytes": 55748,
+      "reviewed": true,
+      "rights": "owner-approved",
+      "description": "Owned software interface containing reviewed public copy, original gallery artwork, or a source-backed aggregate research chart."
+    },
+    {
+      "src": "/media/approved/travel-studio-sculpture-study.mp4",
+      "sha256": "ff14a5913312ac2f78a0ffcaf78924f5ee77e015c9797b5fd2cc6955a4f6d6d3",
+      "bytes": 388613,
+      "reviewed": true,
+      "rights": "owner-approved",
+      "description": "Owned software interface containing reviewed public copy, original gallery artwork, or a source-backed aggregate research chart."
+    }
+  ]
+}

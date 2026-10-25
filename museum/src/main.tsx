@@ -4,6 +4,15 @@ import gsap from "gsap";
 import { exhibits, findExhibit, type Exhibit } from "./data/exhibits";
 import { site } from "./data/site.config";
 import "./museum.css";
+import {
+  WorkIndex,
+  CaseStudy,
+  WorldRoom,
+  NotesRoom,
+  TimelineRoom,
+  RoomLink,
+} from "./rooms";
+import { projects, findProject, findNote } from "./content";
 
 const cleanPath = () => location.pathname.replace(/\/$/, "") || "/";
 const asset = (name: string) => `/assets/${name}.webp`;
@@ -605,6 +614,20 @@ function Detail({
           <h1>{exhibit.title}</h1>
           <p>{exhibit.oneLiner}</p>
           <div className="detail-actions">
+            {exhibit.destination &&
+              (exhibit.destination.path === "/travel/" ? (
+                <a className="pill" href="/travel/">
+                  {exhibit.destination.label} →
+                </a>
+              ) : (
+                <RoomLink
+                  className="pill"
+                  to={exhibit.destination.path}
+                  nav={nav}
+                >
+                  {exhibit.destination.label} →
+                </RoomLink>
+              ))}
             {exhibit.interaction === "sound" && (
               <button className="pill" onClick={toggleSound}>
                 {playing ? "Pause sound" : "Play sound"}
@@ -675,6 +698,30 @@ function Detail({
             </p>
           )}
           {exhibit.interaction === "pipeline" && <Pipeline />}
+          {projects.some((p) => p.exhibit === exhibit.slug) && (
+            <div
+              className="exhibit-destinations"
+              aria-label="Project case studies"
+            >
+              {projects
+                .filter((p) => p.exhibit === exhibit.slug)
+                .map((p) => (
+                  <RoomLink key={p.slug} to={"/work/" + p.slug} nav={nav}>
+                    {p.title} ↗
+                  </RoomLink>
+                ))}
+            </div>
+          )}
+          {exhibit.slug === "world-cabinet" && (
+            <div className="exhibit-destinations">
+              <RoomLink to="/world" nav={nav}>
+                Places and stories ↗
+              </RoomLink>
+              <RoomLink to="/timeline" nav={nav}>
+                Along the way ↗
+              </RoomLink>
+            </div>
+          )}
           {exhibit.links && (
             <div className="exhibit-links">
               {exhibit.links.map((link) => (
@@ -751,6 +798,20 @@ function About({ nav }: { nav: Nav }) {
                 </a>
               ))}
           </div>
+          <div className="about-rooms">
+            <RoomLink to="/work" nav={nav}>
+              The workshop ↗
+            </RoomLink>
+            <RoomLink to="/world" nav={nav}>
+              Places ↗
+            </RoomLink>
+            <RoomLink to="/notes" nav={nav}>
+              Notebook ↗
+            </RoomLink>
+            <RoomLink to="/timeline" nav={nav}>
+              Timeline ↗
+            </RoomLink>
+          </div>
           <div className="about-contact">
             <a className="pill" href={site.cv} target="_blank" rel="noreferrer">
               View CV <Arrow />
@@ -795,6 +856,16 @@ function App() {
   useEffect(() => {
     if (exhibit) setActive(exhibits.indexOf(exhibit));
   }, [exhibit]);
+  const project = path.startsWith("/work/")
+    ? findProject(path.split("/")[2])
+    : undefined;
+  const note = path.startsWith("/notes/")
+    ? findNote(path.split("/")[2])
+    : undefined;
+  const isWork = path === "/work";
+  const isWorld = path === "/world";
+  const isNotes = path === "/notes" || !!note;
+  const isTimeline = path === "/timeline";
   const isHome = path === "/";
   const isGallery = path === "/explore";
   const isAbout = ["/about", "/contact"].includes(path);
@@ -853,7 +924,11 @@ function App() {
     };
     const escape = (e: KeyboardEvent) => {
       if (e.key === "Escape") {
-        if (exhibit) navigate("/explore");
+        if (project) navigate("/exhibit/" + project.exhibit);
+        else if (note) navigate("/notes");
+        else if (isWorld) navigate("/exhibit/world-cabinet");
+        else if (isTimeline) navigate("/about");
+        else if (exhibit) navigate("/explore");
         else if (!isHome) navigate("/");
       }
     };
@@ -867,6 +942,17 @@ function App() {
   }, [path, reduced]);
   useLayoutEffect(() => {
     const title =
+      project?.title ||
+      note?.title ||
+      (isWork
+        ? "The workshop"
+        : isWorld
+          ? "The World Cabinet"
+          : isNotes
+            ? "The notebook"
+            : isTimeline
+              ? "Along the way"
+              : undefined) ||
       exhibit?.title ||
       (isGallery
         ? "The collection"
@@ -985,6 +1071,16 @@ function App() {
             playing={sound.playing}
             toggleSound={sound.toggle}
           />
+        ) : project ? (
+          <CaseStudy key={project.slug} project={project} nav={navigate} />
+        ) : isWork ? (
+          <WorkIndex nav={navigate} />
+        ) : isWorld ? (
+          <WorldRoom nav={navigate} />
+        ) : isNotes ? (
+          <NotesRoom key={path} note={note} nav={navigate} />
+        ) : isTimeline ? (
+          <TimelineRoom nav={navigate} />
         ) : isAbout ? (
           <About nav={navigate} />
         ) : (

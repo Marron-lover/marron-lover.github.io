@@ -1,0 +1,28 @@
+{
+  "schemaVersion": 1,
+  "reviewed": true,
+  "source": "Atlas reviewed editorial export",
+  "contentSha256": "0ce9df2b20d8d06b6b88e79b31725d7b532fb3b2b7be01d544ad2be0e81367a1",
+  "counts": {
+    "projects": 10,
+    "notes": 2,
+    "timeline": 13
+  },
+  "media": [
+    {
+      "src": "/media/approved/atlas-editorial-interface.webp",
+      "sha256": "8d4e668fc3df2a88ffe78b82c17cb1d6b12aacb630f5fa382428d38b15137467",
+      "bytes": 81668
+    },
+    {
+      "src": "/media/approved/travel-studio-interface.webp",
+      "sha256": "5a9ef3c6e1d7e077d3991a035eb68bcdb5bf3220d8f33b15d35d4a7d417c7f13",
+      "bytes": 55748
+    },
+    {
+      "src": "/media/approved/travel-studio-sculpture-study.mp4",
+      "sha256": "ff14a5913312ac2f78a0ffcaf78924f5ee77e015c9797b5fd2cc6955a4f6d6d3",
+      "bytes": 388613
+    }
+  ]
+}

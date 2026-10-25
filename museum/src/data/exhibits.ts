@@ -1,4 +1,5 @@
 export type Exhibit = {
+  destination?: { path: string; label: string };
   slug: string;
   title: string;
   category: string;
@@ -15,6 +16,10 @@ export type Exhibit = {
 export const exhibits: Exhibit[] = [
   {
     slug: "ai-experiments",
+    destination: {
+      path: "/work/visual-data-foundry",
+      label: "Follow the pipeline",
+    },
     title: "AI Experiments",
     category: "AI & image making",
     year: "2025–26",
@@ -32,6 +37,7 @@ export const exhibits: Exhibit[] = [
   },
   {
     slug: "world-cabinet",
+    destination: { path: "/travel/", label: "Explore my travel map" },
     title: "The World Cabinet",
     category: "Places & perspectives",
     year: "A growing collection",
@@ -39,7 +45,7 @@ export const exhibits: Exhibit[] = [
     color: "#DAEBD6",
     asset: "world",
     description: [
-      "The first anchors in this cabinet come from documented study and work: the University of Sydney, an AI engineering internship with Cloudsway Technology in Shanghai, and University College London’s Summer School in International Trade and Migration.",
+      "My confirmed travel map begins with Egypt in July 2025. Other parts of this cabinet connect documented study and work: the University of Sydney, an AI engineering internship with Cloudsway Technology in Shanghai, and University College London’s Summer School in International Trade and Migration.",
       "Elsewhere Archive brings another perspective: a research prototype about migration, international student stories and practical questions of belonging. The cabinet is structured to hold personal photographs and travel notes as they are added.",
     ],
     links: [
@@ -51,6 +57,7 @@ export const exhibits: Exhibit[] = [
   },
   {
     slug: "things-i-built",
+    destination: { path: "/work", label: "Open the workshop" },
     title: "Things I Built",
     category: "Engineering & research",
     year: "2025–26",
@@ -76,6 +83,10 @@ export const exhibits: Exhibit[] = [
   },
   {
     slug: "collected-light",
+    destination: {
+      path: "/work/travel-reel-studio",
+      label: "Inside the studio",
+    },
     title: "Collected Light",
     category: "Moving images",
     year: "2026",
@@ -83,16 +94,20 @@ export const exhibits: Exhibit[] = [
     color: "#EFE7DA",
     asset: "light",
     description: [
-      "Travel Reel Studio connects AI-assisted edit planning with a native FFmpeg renderer. A creative brief becomes a reviewable timeline and a local vertical-video export.",
+      "Travel Reel Studio connects AI-assisted edit planning with a native FFmpeg renderer. A creative brief becomes a reviewable timeline and verified local film, with landscape and portrait support.",
       "The workflow preserves source media and verifies the resulting output. It is a way of making model decisions concrete: a clip selection, a cut, a render you can inspect.",
     ],
     facts: [
-      { label: "Verified export", value: "1080 × 1920" },
+      { label: "Verified export", value: "1920 × 1080" },
       { label: "Video", value: "H.264 · 30 fps" },
     ],
   },
   {
     slug: "visual-lab",
+    destination: {
+      path: "/work/visual-taxonomy-lab",
+      label: "Explore the visual systems",
+    },
     title: "Visual Lab",
     category: "Visual systems",
     year: "2025–26",
@@ -108,6 +123,7 @@ export const exhibits: Exhibit[] = [
   },
   {
     slug: "notes-from-elsewhere",
+    destination: { path: "/notes", label: "Read the notebook" },
     title: "Notes From Elsewhere",
     category: "Research & belonging",
     year: "2026",
@@ -141,6 +157,7 @@ export const exhibits: Exhibit[] = [
   },
   {
     slug: "about-me",
+    destination: { path: "/about", label: "About the collection" },
     title: "About Me",
     category: "Yinan Feng",
     year: "Sydney",

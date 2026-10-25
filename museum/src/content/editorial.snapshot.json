@@ -1,0 +1,1207 @@
+{
+  "schemaVersion": 1,
+  "exportedAt": "2026-10-25T05:36:56+00:00",
+  "projects": [
+    {
+      "slug": "aesthetic-image-curator",
+      "title": "Aesthetic Image Curator",
+      "category": "Visual data · Editorial quality",
+      "status": "Implemented collection and review tooling",
+      "timeRange": "July–August 2026",
+      "summary": "Treating image collection as an editorial decision.",
+      "lead": "Downloading a beautiful image is easy to describe. Explaining why it belongs in a particular collection takes more care.",
+      "role": "Collection, classification, quality-analysis and provenance-preserving duplicate-review workflows.",
+      "tools": [
+        "Python",
+        "Pillow",
+        "OpenCV",
+        "Vision-language models",
+        "CSV/JSON provenance",
+        "Image hashing"
+      ],
+      "contribution": [
+        "Worked on source collection, category reclassification and coverage top-ups.",
+        "Implemented conservative CPU quality diagnostics alongside visual-language review.",
+        "Built review-sheet and finalization workflows around actual candidate images.",
+        "Preserved duplicate decisions through quarantine and synchronized provenance records."
+      ],
+      "problem": "A collection needs consistent technical quality and a meaningful visual boundary. Download success alone cannot establish either. The same source asset can also appear under several semantic categories, making a folder count look larger than the actual collection.",
+      "approach": [
+        "Decode and measure the source image before assigning a technical pass.",
+        "Use conservative information, clipping and blur checks to flag weak candidates.",
+        "Inspect category fit through image-specific visual-language review.",
+        "Track source identity and preserve duplicate decisions alongside delivery metadata."
+      ],
+      "challenges": [
+        "A strong aesthetic impression can distract from a category mismatch.",
+        "Low information, severe blur and clipped images require different evidence.",
+        "Cross-category duplicates need semantic ownership decisions.",
+        "A shortage in one category should prompt a targeted top-up rather than lowering its standard."
+      ],
+      "architecture": [
+        {
+          "title": "Collect with provenance",
+          "description": "Retain source identity alongside the candidate file."
+        },
+        {
+          "title": "Inspect technical quality",
+          "description": "Check decode, dimensions, format and conservative image-information signals."
+        },
+        {
+          "title": "Review category fit",
+          "description": "Judge the actual candidate against its intended visual purpose."
+        },
+        {
+          "title": "Reconcile the collection",
+          "description": "Resolve duplicate ownership and keep metadata synchronized with retained files."
+        }
+      ],
+      "metrics": [],
+      "sections": [
+        {
+          "title": "Conservative checks",
+          "body": [
+            "The CPU analysis combines ordinary file facts with image diagnostics: dimensions, decoded format, information content, brightness variation and blur signals. These checks are useful because their scope is clear. They can identify a corrupt or almost empty frame without pretending to be an aesthetic critic.",
+            "Visual-language review addresses another question: does the current image belong in the intended category? The two decisions remain legible rather than being compressed into one unexplained quality score."
+          ]
+        },
+        {
+          "title": "Duplicates have a context",
+          "body": [
+            "A repeated source asset can appear in several leaves of a taxonomy. Keeping the earliest filename is convenient, but the better placement can depend on what the image actually depicts. The tooling therefore supports explicit keep decisions, a recoverable quarantine and synchronized metadata/provenance tables.",
+            "That last step matters. Removing a file while leaving an old manifest or category total behind creates an internally inconsistent delivery. Reconciliation is part of the operation, not an optional cleanup afterward."
+          ]
+        },
+        {
+          "title": "Collection as a practice",
+          "body": [
+            "I came to see this work as a form of editing with software. Code handles reproducible facts, visual review handles contextual judgment, and provenance keeps both accountable. A useful collection is the result of those decisions, rather than a directory that happened to fill up."
+          ]
+        }
+      ],
+      "results": [
+        "Implemented candidate quality, category-review and provenance-reconciliation tooling.",
+        "Made duplicate removal recoverable and reflected it in the collection’s metadata.",
+        "Connected targeted collection work to observed category needs."
+      ],
+      "limitations": [
+        "Original collected images require their own publication rights review.",
+        "The local copy provides implementation artifacts and dated records rather than complete individual-authorship Git history."
+      ],
+      "lessons": [
+        "Technical quality and semantic fit answer different questions.",
+        "A duplicate decision should preserve its reason and update the manifest.",
+        "Coverage work starts with the collection’s purpose."
+      ],
+      "sourceNote": "Based on dated local aesthetic-image requirements and collection, CPU-QA, VLM-finalization and duplicate-reconciliation source. The public case describes methods; original source images and client-specific details stay private.",
+      "confidence": "medium",
+      "exhibit": "visual-lab"
+    },
+    {
+      "slug": "atlas-careers",
+      "title": "Atlas Careers",
+      "category": "Engineering systems",
+      "exhibit": "things-i-built",
+      "confidence": "high",
+      "metrics": [],
+      "media": [
+        {
+          "src": "/media/approved/atlas-editorial-interface.webp",
+          "alt": "Atlas’s real private editorial interface displaying reviewed public project copy.",
+          "caption": "The actual local editorial workspace. This view contains reviewed public copy; private evidence stays collapsed."
+        }
+      ],
+      "links": [
+        {
+          "label": "How Atlas uses data",
+          "url": "/atlas.html"
+        }
+      ],
+      "status": "Running private workspace",
+      "timeRange": "October 2026",
+      "summary": "Real employer feeds, factual CVs and a record of what actually happened.",
+      "lead": "A career workspace that has to earn its own confidence.",
+      "role": "Owner-led personal system, built with Codex.",
+      "tools": [
+        "Python",
+        "SQLite WAL",
+        "Gmail read-only OAuth",
+        "ATS feeds",
+        "macOS Keychain"
+      ],
+      "problem": "International remote-job research joins information with very different levels of certainty. A listing, an eligibility assessment, a generated CV and a confirmed application cannot all be treated as the same kind of fact.",
+      "contribution": [
+        "Directed and implemented the local-first workflow with Codex, including discovery, professional evidence, CV generation and application records.",
+        "Established explicit gates for uncertain eligibility, factual declarations and submission evidence.",
+        "Extended the workspace with reviewed public editorial snapshots while preserving the private career runtime."
+      ],
+      "approach": [
+        "Keep employer evidence, applicant facts, generated artifacts and application events separate.",
+        "Protect the local workspace with session, origin and CSRF controls.",
+        "Store Gmail credentials in macOS Keychain and request read-only access."
+      ],
+      "challenges": [
+        "An ambiguous submission response must not turn into an invented confirmation or a blind retry.",
+        "Recruiting-message classification is different from verified application evidence.",
+        "Public professional content needs an export boundary that excludes the source database."
+      ],
+      "architecture": [
+        {
+          "title": "Discover",
+          "description": "Public employer feeds provide attributable job postings. Discovery retains the source and research state."
+        },
+        {
+          "title": "Check evidence",
+          "description": "Eligibility and professional claims are evaluated against recorded facts. Missing evidence produces a review state."
+        },
+        {
+          "title": "Prepare",
+          "description": "A tailored CV is generated from source-backed experience with an artifact manifest. It remains distinct from an application event."
+        },
+        {
+          "title": "Record proof",
+          "description": "A submission becomes a confirmed event only with supporting evidence. Ambiguous attempts keep their unresolved state."
+        },
+        {
+          "title": "Track replies",
+          "description": "Read-only Gmail synchronization finds recruiting correspondence. Sender and application evidence support the matching process."
+        },
+        {
+          "title": "Curate publicly",
+          "description": "A separate editorial store exports only reviewed public fields. Private jobs, mail and applicant records remain in the Mac workspace."
+        }
+      ],
+      "sections": [
+        {
+          "title": "Separate the kinds of truth",
+          "body": [
+            "A job listing can be real without being suitable. A CV can be ready without being sent. A message can look like recruiting mail without proving that an application was submitted. Atlas gives each of those states its own record.",
+            "This distinction shaped the data model and the interface. Sources are attributable. Professional statements have evidence. Generated documents carry manifests. Application confirmation requires proof. The system reports actual events rather than converting activity into a success story."
+          ]
+        },
+        {
+          "title": "Local by design",
+          "body": [
+            "The private application uses a Python server and SQLite. The working record stays on the Mac, while public discovery uses employer sources. Gmail access is read-only and its credentials are kept in the system keychain. Session cookies, CSRF checks and explicit host/origin validation protect local actions.",
+            "Local infrastructure also gives the editorial workflow a clear shape. Project research can contain private paths and evidence notes. The website receives a separately reviewed snapshot with a limited schema. It never calls back into the private workspace or needs the owner’s Mac to stay online."
+          ]
+        },
+        {
+          "title": "A review is a version",
+          "body": [
+            "The editorial extension treats approval as a property of an exact revision. Saving a change clears review. Preview shows the sanitized public snapshot and its digest; export checks that the same preview is still current. This makes a change reviewable before it can reach the static site.",
+            "The export module does not query career tables. It has its own project, note and timeline records, explicit publication rights, and field allowlists. Travel has a parallel record-and-media review flow. Public pages remain static, independent artifacts after publication."
+          ]
+        }
+      ],
+      "results": [
+        "A working local research and application-management system.",
+        "Source-backed CV preparation and proof-based application state.",
+        "An authenticated editorial workflow with revision-bound review and sanitized static export."
+      ],
+      "limitations": [
+        "This case describes tested software behavior, not a job-placement outcome.",
+        "Work permission and employer declarations still require factual evidence and owner judgment.",
+        "Automatic discovery and preparation do not establish a completed application."
+      ],
+      "lessons": [
+        "A useful automation system makes uncertainty visible at the point where a decision depends on it.",
+        "The public/private boundary is easier to maintain when the public artifact has a deliberately small model of its own."
+      ],
+      "sourceNote": "Source-checked against local implementation, integration tests and delivery reports. Professional project information is public; applicant records, Gmail content and application history stay private."
+    },
+    {
+      "slug": "chinese-web-collection-engine",
+      "title": "Chinese Web Collection Engine",
+      "category": "Distributed systems · Text data",
+      "status": "Implemented and investigated in production",
+      "timeRange": "September–October 2026",
+      "summary": "From a discovered URL to a recoverable, unique text record.",
+      "lead": "Finding more pages is useful only if the system can turn them into verified, usable text without losing its place.",
+      "role": "Guarded discovery, resumable inventory, acquisition, duplicate-checking and delivery engineering, with traceable Git contributions.",
+      "tools": [
+        "Python",
+        "SQLite",
+        "SHA-256",
+        "MinHash/LSH",
+        "Zstandard",
+        "Persistent outboxes",
+        "Source provenance",
+        "Object storage"
+      ],
+      "contribution": [
+        "Built guarded discovery and validation, with September Git history tracing the initial implementation.",
+        "Implemented resumable source-inventory and historical-content workflows.",
+        "Worked on persistent acceptance, global exact/near duplicate checks and compressed output.",
+        "Investigated end-to-end bottlenecks while keeping preparation-stage measurements distinct from delivered throughput."
+      ],
+      "problem": "A web collection can accumulate an impressive inventory without producing much usable unique text. URL discovery, fetch completion, extraction, quality acceptance, global deduplication and remote delivery each impose a separate constraint. Recovery must preserve the decision and its source position across those boundaries.",
+      "approach": [
+        "Use conservative URL normalization and a persistent frontier.",
+        "Retain source intelligence and provenance, with bounded qualification and polite acquisition.",
+        "Combine exact hashes with global near-duplicate checks.",
+        "Commit accepted records through a durable outbox before producing compressed shards.",
+        "Reconcile interrupted writes and verify delivered artifacts independently."
+      ],
+      "challenges": [
+        "Source rows, unique hosts, URLs and accepted bodies are different quantities.",
+        "Shared I/O, memory pressure and central serialization affect the complete pipeline.",
+        "A fast isolated function may contribute little to end-to-end output.",
+        "Interrupted acceptance and shard writes need an explicit recovery contract."
+      ],
+      "architecture": [
+        {
+          "title": "Discover and qualify",
+          "description": "Record source evidence, normalize URLs and retain resumable inventory positions."
+        },
+        {
+          "title": "Fetch and extract",
+          "description": "Respect source access constraints and turn retrieved content into candidate text."
+        },
+        {
+          "title": "Validate and deduplicate",
+          "description": "Apply content requirements and exact/near duplicate checks against recorded history."
+        },
+        {
+          "title": "Commit and export",
+          "description": "Persist acceptance in an outbox, publish compressed shards and reconcile interrupted writes."
+        },
+        {
+          "title": "Verify delivery",
+          "description": "Check the destination artifact and retain the evidence needed to connect it to accepted records."
+        }
+      ],
+      "metrics": [],
+      "sections": [
+        {
+          "title": "Progress that survives a restart",
+          "body": [
+            "The local workflow records frontier and duplicate state durably. Accepted records enter an outbox before shard publication. Temporary files, finalized shards and commit evidence have separate roles, allowing startup recovery to investigate interrupted writes rather than silently guessing what succeeded.",
+            "This made the state model more important than any one crawler function. A restart needs to recover both the source position and the meaning of the last committed decision."
+          ]
+        },
+        {
+          "title": "Where the time actually goes",
+          "body": [
+            "Production investigation required looking beyond request concurrency. Discovery, acceptance serialization, shared storage and delivery can each become the limiting stage. Measuring one component in isolation gives a capacity observation, not a claim about the output visitors or customers can use.",
+            "I learned to preserve complete observation windows and failed optimization attempts. A change that speeds a local stage can still reduce the whole system’s output. Keeping that result visible is more useful than selecting a favorable burst."
+          ]
+        },
+        {
+          "title": "The outcome I value",
+          "body": [
+            "The project became a practical exercise in making data work explainable: where a record came from, why it passed, whether it was already present, and how its compressed output can be recovered and verified. That is the engineering story behind the crawler."
+          ]
+        }
+      ],
+      "results": [
+        "Implemented a connected discovery-to-delivery workflow with durable recovery.",
+        "Preserved source positions and acceptance decisions across output stages.",
+        "Used production investigation to distinguish isolated speedups from whole-system behavior."
+      ],
+      "limitations": [
+        "Exact client volumes, deployment topology and operational evidence remain private.",
+        "This case claims no unverified sustained-rate or total-volume target."
+      ],
+      "lessons": [
+        "Count records at the stage that answers the question.",
+        "Durable boundaries make recovery a routine operation.",
+        "Optimize the complete path and keep negative results."
+      ],
+      "sourceNote": "Based on September 2026 Git history and local discovery, persistence, architecture and dated production-investigation records through October. Public text summarizes generalized implementation rather than disclosing client data or operating infrastructure.",
+      "confidence": "high",
+      "exhibit": "visual-lab"
+    },
+    {
+      "slug": "elsewhere-archive",
+      "title": "Elsewhere Archive",
+      "category": "Research & culture",
+      "exhibit": "notes-from-elsewhere",
+      "confidence": "medium",
+      "metrics": [],
+      "media": [],
+      "links": [
+        {
+          "label": "Supporting prototype source",
+          "url": "https://github.com/Marron-lover/elsewhere-archive"
+        }
+      ],
+      "status": "Course research prototype",
+      "timeRange": "May 2026",
+      "summary": "Research about migration becomes something a newcomer can navigate.",
+      "lead": "A question about belonging, translated into an interface.",
+      "role": "FASS3999 research-translation prototype; project documentation uses team framing.",
+      "tools": [
+        "Research translation",
+        "Information architecture",
+        "Static web"
+      ],
+      "problem": "International student experience is often described through institutional categories. The prototype asks how stories, practical questions and research might become more approachable entry points.",
+      "contribution": [
+        "Contributed to a research-translation prototype connecting migration themes, newcomer questions and narrative navigation.",
+        "The public project record is retained with team attribution; specific participant material remains outside this case."
+      ],
+      "approach": [
+        "Organize themes around arrival, language and belonging.",
+        "Connect practical questions with broader research context."
+      ],
+      "challenges": [
+        "A readable prototype is not evidence of participant outcomes.",
+        "Stories need consent and context before becoming public content."
+      ],
+      "architecture": [
+        {
+          "title": "Research question",
+          "description": "Begin with migration and international student experience rather than an institutional enrolment category."
+        },
+        {
+          "title": "Themes",
+          "description": "Use arrival, language and belonging as ways into the material."
+        },
+        {
+          "title": "Practical questions",
+          "description": "Connect a newcomer’s immediate question to a broader research context."
+        },
+        {
+          "title": "Readable prototype",
+          "description": "Offer a small navigable public prototype, with its experimental scope kept clear."
+        }
+      ],
+      "sections": [
+        {
+          "title": "A different entry point",
+          "body": [
+            "The project connects the digital-cultures side of my studies with interface design. The central problem is translation: how does a research question become a page someone chooses to explore?",
+            "Elsewhere Archive groups story themes and practical questions around migration experience. It remains a course prototype. Its existence demonstrates an information architecture and a research-translation approach; it does not establish a measured effect on students."
+          ]
+        },
+        {
+          "title": "Keep the people in view",
+          "body": [
+            "Participant experience is more than interface material. This case describes the public prototype’s structure and purpose without republishing private stories or claiming ownership of every team contribution.",
+            "The useful design question is whether the navigation helps a reader find an entry point into an unfamiliar experience. That question continues beyond the prototype."
+          ]
+        }
+      ],
+      "results": [
+        "A public research-translation prototype with thematic navigation."
+      ],
+      "limitations": [
+        "Individual contribution detail beyond the documented team context remains for further review.",
+        "No participant-impact study is claimed."
+      ],
+      "lessons": [
+        "Research can become an interface without pretending that the interface has settled the research question."
+      ],
+      "sourceNote": "Based on the public prototype documentation and professional project record. Team framing is retained; participant material is excluded."
+    },
+    {
+      "slug": "infographic-evidence-pipeline",
+      "title": "Infographic Evidence Pipeline",
+      "category": "Data infrastructure · Visual review",
+      "status": "Implemented production workflows",
+      "timeRange": "September–October 2026",
+      "summary": "Making every image’s acceptance explainable.",
+      "lead": "A source can be promising while an individual image is unsuitable. The pipeline has to preserve that distinction all the way to delivery.",
+      "role": "Hands-on production workflow, review configuration, recovery and evidence-based delivery engineering.",
+      "tools": [
+        "Python",
+        "PostgreSQL",
+        "Redis",
+        "Asynchronous workers",
+        "Vision-language models",
+        "SHA-256",
+        "Perceptual hashing",
+        "Object storage"
+      ],
+      "contribution": [
+        "Worked on independent service, scheduler, worker and source-registry workflows.",
+        "Maintained explicit per-image acceptance and prompt-version evidence.",
+        "Investigated source rotation, cooldown, checkpoint recovery and delivery-state boundaries.",
+        "Connected production observations to verification of actual delivered objects."
+      ],
+      "problem": "A long-running infographic collection combines heterogeneous sources, deterministic quality checks and semantic judgment. A trusted source does not guarantee a suitable image. A historical pass also does not automatically establish that the correct file was delivered under the current contract.",
+      "approach": [
+        "Keep semantic group match, technical QC, visual-language review and duplicate checks as explicit predicates.",
+        "Judge each current image independently of its source, filename and folder.",
+        "Record the review prompt version and hash with its decision.",
+        "Use durable source cursors, cooldowns and recoverable work stages.",
+        "Count verified remote objects separately from historical acceptance and current quotas."
+      ],
+      "challenges": [
+        "Provider rate limits and source exhaustion interrupt supply.",
+        "A changed prompt can silently change the meaning of a pass unless versioned.",
+        "Historical FINAL records and a current delivery batch represent different sets.",
+        "Short bursts and stage-specific rates do not prove sustained end-to-end throughput."
+      ],
+      "architecture": [
+        {
+          "title": "Discover original material",
+          "description": "Enumerate eligible sources with resumable catalogs and source evidence."
+        },
+        {
+          "title": "Run technical checks",
+          "description": "Decode, inspect dimensions and format, hash and compare the actual file."
+        },
+        {
+          "title": "Judge the image",
+          "description": "Apply the current semantic prompt to the image and record its versioned decision."
+        },
+        {
+          "title": "Reconcile and deliver",
+          "description": "Preserve global duplicate evidence, current batch ownership and verified destination objects."
+        }
+      ],
+      "metrics": [],
+      "sections": [
+        {
+          "title": "A pass needs a definition",
+          "body": [
+            "The production rule joins four requirements: group match, technical quality, VLM acceptance and deduplication. The strength of that rule is its specificity. Each stage produces evidence about the image being considered rather than inheriting acceptance from its source.",
+            "Review prompts live at a defined authority. Their version and hash are recorded with decisions so an operator can understand which instruction produced a pass. Configuration becomes part of the experiment and part of the audit trail."
+          ]
+        },
+        {
+          "title": "Keep production recoverable",
+          "body": [
+            "Source rotation and provider cooldowns are ordinary operating conditions. Durable cursors and retry state let other sources keep contributing while one provider asks the pipeline to wait. Checkpoints also preserve the difference between work already accepted and work still in flight.",
+            "Delivery needs its own evidence. The workflow checks remote objects and manifests rather than promoting a relabeled local record into a completed handover. This protects both the engineering record and the meaning of the customer batch."
+          ]
+        },
+        {
+          "title": "Measure the whole path",
+          "body": [
+            "The central lesson was to separate upstream capacity, processed candidates, strict acceptance and verified delivery. They are useful measures, but each has a different denominator. A throughput target remains a target until an actual complete window supports the claim."
+          ]
+        }
+      ],
+      "results": [
+        "Implemented traceable per-image acceptance and versioned semantic-review records.",
+        "Built recovery and source-rotation workflows around persistent production state.",
+        "Established a distinction between acceptance accounting and verified delivery."
+      ],
+      "limitations": [
+        "Client counts, original media and infrastructure details stay private.",
+        "This case makes no claim that a headline volume or sustained-throughput target was achieved."
+      ],
+      "lessons": [
+        "A trustworthy total begins with a precise unit.",
+        "Review configuration belongs with the evidence.",
+        "Recovery should preserve quality guarantees."
+      ],
+      "sourceNote": "Based on September–October 2026 production source, acceptance policies and dated recovery/delivery records. Project targets and historical snapshots are kept distinct from verified current outcomes.",
+      "confidence": "high",
+      "exhibit": "visual-lab"
+    },
+    {
+      "slug": "pansegai",
+      "title": "PanSegAI",
+      "category": "Medical imaging · Research software",
+      "status": "Team capstone and retrospective research",
+      "timeRange": "August–October 2026",
+      "summary": "Better segmentation averages, examined one failure at a time.",
+      "lead": "A cleaner boundary is encouraging. A genuine structure removed by the same rule is a reason to look much more carefully.",
+      "role": "Hands-on baseline, training, evaluation, postprocessing and delivery engineering within a University of Sydney team capstone.",
+      "tools": [
+        "Python",
+        "nnU-Net v2",
+        "CT and MRI evaluation",
+        "Probability maps",
+        "Connected-component analysis",
+        "Docker",
+        "Reproducible research"
+      ],
+      "contribution": [
+        "Implemented reproducible baseline preparation, hosted training and CT evaluation workflows.",
+        "Worked on T2 MRI quality analysis, provenance recovery and frozen comparison workflows.",
+        "Developed and investigated probability-aware component postprocessing and its failure cases.",
+        "Contributed offline CPU acceptance, metadata validation, native-geometry checks and reproducible result verification.",
+        "Kept my technical contribution distinct from the work and writing owned by other team members."
+      ],
+      "problem": "Disconnected model predictions can contain useful tissue as well as detached false positives. Keeping only the largest connected component is simple, but it can remove a genuine part of the target. The research question was whether the confidence structure between predicted components could provide a more informative basis for postprocessing and review.",
+      "approach": [
+        "Prepare and record fixed cohorts, label definitions, model predictions and evaluator settings.",
+        "Use probability-aware Soft Attachment to investigate relationships between disconnected foreground components.",
+        "Compare postprocessing methods on the same underlying predictions.",
+        "Retain per-case and component-level failure analysis alongside aggregate metrics.",
+        "Separate retrospective research comparisons from the behavior and acceptance checks of the delivered offline tool."
+      ],
+      "challenges": [
+        "A mean metric can improve while an important individual case gets worse.",
+        "A predicted mass label can occur in false positives and be absent from genuine mass-bearing tissue.",
+        "Different HD95 evaluation implementations can produce different values from the same saved predictions.",
+        "Replaying saved masks verifies a different scope from running fresh inference on an original image.",
+        "A research result and a usable offline handover need different forms of verification."
+      ],
+      "architecture": [
+        {
+          "title": "Establish the input",
+          "description": "Validate image and metadata contracts, identify modality and record the relevant configuration."
+        },
+        {
+          "title": "Generate predictions",
+          "description": "Run the selected segmentation model or explicitly identify a saved-prediction replay."
+        },
+        {
+          "title": "Inspect components",
+          "description": "Analyze connected foreground regions and probability support between them."
+        },
+        {
+          "title": "Compare and review",
+          "description": "Apply fixed method rules, calculate matched-cohort metrics and retain harmful cases for inspection."
+        },
+        {
+          "title": "Deliver an auditable result",
+          "description": "Export a native-space mask and verification evidence, with review behavior distinguished from retrospective postprocessing."
+        }
+      ],
+      "metrics": [
+        {
+          "label": "Dice",
+          "before": 0.762,
+          "after": 0.7771,
+          "context": "CT fold 1, 56 cases, pancreas-plus-tumour foreground. Raw predictions versus frozen Soft Attachment on the same underlying nnU-Net predictions."
+        },
+        {
+          "label": "HD95",
+          "before": 36.06,
+          "after": 13.33,
+          "unit": "mm",
+          "context": "Same 56-case CT comparison. Lower is better. Retrospective research evaluation, not a clinical effectiveness result."
+        }
+      ],
+      "sections": [
+        {
+          "title": "The comparison had to stay fixed",
+          "body": [
+            "The project spans CT and MRI, multiple baselines and several evaluation stages. My work included making those stages reproducible: preparation, training configuration, prediction evaluation, provenance and recovery. A result needs its cohort, label definition and evaluator to remain attached to it.",
+            "The highlighted comparison is deliberately narrow. It uses 56 CT cases from one frozen fold, with pancreas-plus-tumour foreground and the same underlying model predictions. Raw predictions reached mean Dice 0.7620 and HD95 36.06 mm. Frozen Soft Attachment reached 0.7771 and 13.33 mm. This isolates a postprocessing comparison; it does not attribute the change to a newly trained architecture."
+          ]
+        },
+        {
+          "title": "Confidence between components",
+          "body": [
+            "Soft Attachment asks how strongly a secondary predicted component connects to the main prediction through the model’s foreground-support field. It uses the confidence structure around a split rather than relying only on the size of the disconnected region. Ground truth supports retrospective evaluation; it is excluded from the attachment calculation itself.",
+            "That distinction matters because the method is trying to extract useful information from a prediction, not to borrow the answer from its reference mask. The implementation records the probability contract, connectivity rule and fixed evaluation conditions so later analysis can distinguish method behavior from a changed input."
+          ]
+        },
+        {
+          "title": "The failure changed the story",
+          "body": [
+            "A CT safety audit found genuine mass-bearing secondary components removed by the frozen rule. Some carried a strong predicted mass signal; others did not. Strong mass predictions also appeared in false-positive components. A simple “keep predicted mass” condition could therefore neither recover every harmful removal nor provide a reliable automatic retention rule.",
+            "The aggregate result stayed in the record. The failure stayed beside it. That led toward a review-first delivery approach in which suspicious components remain available for inspection, and toward development questions involving uncertainty, local image evidence, anatomy and component context. Those ideas need their own separate development and locked validation."
+          ]
+        },
+        {
+          "title": "Keep the evaluator in the picture",
+          "body": [
+            "The MRI work reinforced the same discipline. A training-log summary, a local quality-control recomputation and a shared surface-distance evaluator can report different values because they measure or aggregate different stages. I kept those identities attached to the results rather than choosing whichever number looked strongest. That made later comparisons easier to interpret and kept retrospective review rankings separate from claims about a deployable failure detector. A clear denominator and a named evaluation stage are part of the result."
+          ]
+        },
+        {
+          "title": "From experiment to a usable tool",
+          "body": [
+            "Research evaluation is only one part of a handover. I also contributed to offline CPU execution, acquisition-metadata checks, geometry validation and saved-result reproduction. The client workflow needs to explain which input, configuration and model produced an output and whether its native spatial geometry is preserved.",
+            "Saved-mask replay has a narrower claim: it can compare predictions and references on their recorded grids. It does not independently establish the geometry of an original input image. Keeping execution modes explicit made the software more honest and made a failed verification easier to investigate."
+          ]
+        },
+        {
+          "title": "Working within a team",
+          "body": [
+            "PanSegAI is a team capstone. My traceable contributions sit in baseline and evaluation workflows, probability/component analysis, failure investigation and release verification. The final research and software sit within the group’s wider work, and each member retains ownership of their own contributions. The lesson I would carry into another project is to give negative evidence the same clarity as a successful result."
+          ]
+        }
+      ],
+      "results": [
+        "Frozen 56-case CT postprocessing comparison improved mean Dice and HD95 using the same model predictions.",
+        "Documented a harmful genuine-tissue removal and investigated why a simple mass-class rule was insufficient.",
+        "Implemented research and offline-delivery verification as distinct, traceable workflows."
+      ],
+      "limitations": [
+        "Retrospective research cohorts do not establish clinical safety or effectiveness.",
+        "The positive aggregate result includes an important harmful individual failure.",
+        "CT folds, MRI cohorts, label definitions and evaluator versions must remain separate.",
+        "Medical images, patient-derived records and confidential team material remain private."
+      ],
+      "lessons": [
+        "Improved averages need a visible per-case safety audit.",
+        "A review-first output preserves evidence when automatic decisions are uncertain.",
+        "Reproducibility includes the evaluator and execution mode as well as the model."
+      ],
+      "sourceNote": "Based on the capstone Git history and dated baseline, frozen common-evaluator, semantic-safety and offline acceptance reports. The displayed values reproduce the previously published 56-case aggregate with its cohort and comparator restored.",
+      "confidence": "high",
+      "exhibit": "things-i-built"
+    },
+    {
+      "slug": "tradish",
+      "title": "Tradish",
+      "category": "Interaction prototypes",
+      "exhibit": "things-i-built",
+      "confidence": "medium",
+      "metrics": [],
+      "media": [],
+      "links": [
+        {
+          "label": "Supporting concept demo",
+          "url": "https://github.com/Marron-lover/tradish-site"
+        }
+      ],
+      "status": "Hackathon exploration",
+      "timeRange": "September 2025",
+      "summary": "Recipe discovery as a way into culture, context and ingredients.",
+      "lead": "What changes when a recipe carries its context with it?",
+      "role": "Led React Native development in the hackathon team, as recorded in the original CV.",
+      "tools": [
+        "React Native",
+        "Semantic search",
+        "Computer vision",
+        "NLP"
+      ],
+      "problem": "Recipe discovery needs to connect the dish with cultural context and the ingredients someone can actually find.",
+      "contribution": [
+        "Led the React Native app development recorded in the professional CV.",
+        "Worked within an AI hackathon concept combining recipe discovery, cultural information and ingredient guidance."
+      ],
+      "approach": [
+        "Explore onboarding by language and country.",
+        "Connect recipe discovery with cultural detail and ingredient substitutions."
+      ],
+      "challenges": [
+        "A public HTML concept demo is distinct from the team’s mobile hackathon implementation.",
+        "A prototype flow is useful evidence of an idea, not proof of a production service."
+      ],
+      "architecture": [
+        {
+          "title": "Context",
+          "description": "Language and country provide a possible starting point for discovery."
+        },
+        {
+          "title": "Discover",
+          "description": "Search and recommendation concepts connect people with relevant dishes."
+        },
+        {
+          "title": "Understand",
+          "description": "Cultural detail gives a recipe context beyond its ingredient list."
+        },
+        {
+          "title": "Adapt",
+          "description": "Ingredient guidance explores how a dish might be made with available substitutes."
+        }
+      ],
+      "sections": [
+        {
+          "title": "An idea under a deadline",
+          "body": [
+            "Tradish was a hackathon exploration of culturally grounded recipe discovery. The team combined several AI ideas; my CV records leadership of React Native development.",
+            "The supporting public repository is an HTML concept/demo. It helps explain the intended journey, while the case keeps its scope separate from the mobile work. There is no claim here that the prototype operated a production recommendation backend."
+          ]
+        }
+      ],
+      "results": [
+        "A hackathon project and a supporting public concept demonstration."
+      ],
+      "limitations": [
+        "Implementation detail beyond the documented CV role remains bounded.",
+        "No production usage or effectiveness metric is claimed."
+      ],
+      "lessons": [
+        "A short project can make a design question concrete. Clear scope makes that evidence more useful, not less."
+      ],
+      "sourceNote": "Role is supported by the original professional CV. Supporting repository explicitly describes a concept/demo."
+    },
+    {
+      "slug": "travel-reel-studio",
+      "title": "Travel Reel Studio",
+      "category": "Creative software",
+      "exhibit": "collected-light",
+      "confidence": "high",
+      "metrics": [
+        {
+          "label": "Selected landscape master",
+          "value": "25 s · 1920 × 1080",
+          "context": "H.264, 30 fps. The current selected output passed full-decode verification."
+        },
+        {
+          "label": "One-field revision",
+          "value": "15 reused · 1 encoded",
+          "context": "A recorded note change across a 16-shot edit; these are segment counts for that checkpoint."
+        },
+        {
+          "label": "Public renderer check",
+          "value": "3.6 s · 3 shots",
+          "context": "Original gallery sculpture fixture, rendered by the production FFmpeg path. Silent H.264, 1920 × 1080 at 30 fps; full decode verified."
+        }
+      ],
+      "media": [
+        {
+          "src": "/media/approved/travel-studio-interface.webp",
+          "alt": "Travel Reel Studio with the public sculpture test fixture loaded in its real editor.",
+          "caption": "The actual editor, using original gallery sculptures as a clearly labelled public test fixture."
+        },
+        {
+          "src": "/media/approved/travel-studio-sculpture-study.mp4",
+          "alt": "Silent 3.6-second sculpture study produced by Travel Reel Studio’s actual native renderer.",
+          "caption": "A real renderer check: 3 shots, 3.6 seconds, 1920 × 1080 at 30 fps. Original gallery sculptures only; this is a test fixture, distinct from personal travel footage."
+        }
+      ],
+      "links": [],
+      "status": "Functioning local application",
+      "timeRange": "October 2026",
+      "summary": "A creative brief becomes an editable timeline and a verified local film.",
+      "lead": "The interesting part is what happens after “make it cinematic.”",
+      "role": "Owner-directed product development with Codex-assisted implementation.",
+      "tools": [
+        "Python",
+        "FFmpeg",
+        "TypeScript",
+        "macOS",
+        "AI edit planning"
+      ],
+      "problem": "An editing assistant needs to produce concrete, revisable decisions. A plausible suggestion is useful only when the renderer, preview and next revision agree about the edit.",
+      "contribution": [
+        "Directed the local editing workflow, from natural-language brief to persisted shot decisions and native rendering.",
+        "Developed and checked revision behavior so untouched shot settings survive subsequent requests.",
+        "Connected verification to the exported file: dimensions, frame rate, codec, duration and full decode."
+      ],
+      "approach": [
+        "Persist an explicit edit plan before rendering.",
+        "Use shot-level signatures and a bounded segment cache.",
+        "Keep original media separate from derived previews and exports."
+      ],
+      "challenges": [
+        "Natural-language changes can inadvertently rewrite unrelated choices.",
+        "Preview and final output must preserve the same editing decisions at different resolutions.",
+        "Cloud-backed file coordination and original preservation matter as much as the visual result."
+      ],
+      "architecture": [
+        {
+          "title": "Brief",
+          "description": "The owner describes the intended edit. The planning step turns that request into inspectable decisions rather than an opaque render command."
+        },
+        {
+          "title": "Edit plan",
+          "description": "A persisted timeline records shot choices and settings. Later requests revise identified fields while preserving unmentioned decisions."
+        },
+        {
+          "title": "Segment identity",
+          "description": "Per-shot signatures identify which cached segments remain valid after a change. The cache has a bounded local footprint."
+        },
+        {
+          "title": "Native render",
+          "description": "FFmpeg renders selected source media locally. Preview and full-resolution masters share the edit identity."
+        },
+        {
+          "title": "Verify",
+          "description": "Metadata and full-decode checks inspect the actual output, including aspect, duration, frame rate and codec."
+        }
+      ],
+      "sections": [
+        {
+          "title": "A brief is the start",
+          "body": [
+            "The first version of an AI-assisted edit is only one point in a conversation. The harder requirement is the next request: change a title, adjust one transition, keep the rest. That makes the edit plan a durable product object, rather than a disposable prompt response.",
+            "Travel Reel Studio connects a local editor, AI-assisted planning and FFmpeg. The owner can inspect and change concrete settings. The system preserves source material and stores derived decisions separately. This keeps a creative request connected to something that can be rendered, compared and revised."
+          ]
+        },
+        {
+          "title": "Preserve the decisions",
+          "body": [
+            "The revision path distinguishes a changed field from an unchanged shot. In one recorded 16-shot edit, changing a single note preserved fifteen segments and encoded one. That result is specific to the recorded change; it is not a general speedup claim.",
+            "The same principle applies to the interface. A preview is useful when it represents the current edit, and a full-resolution export is trustworthy when its identity matches the reviewed plan. Stale previews and silent rewrites are correctness problems, even when the final picture looks attractive."
+          ]
+        },
+        {
+          "title": "Inspect the actual film",
+          "body": [
+            "Release records verify both landscape and portrait masters. The current selected master is a 25-second, 1920 × 1080 H.264 film at 30 fps. An earlier validation checkpoint also produced 1080 × 1920 output. These are separate artifacts with separate provenance.",
+            "Verification checks the file after rendering. The metadata includes dimensions, pixel format, frame rate, duration and audio presence; a full decode checks that the stream can be read through. The public case shows technical evidence and workflow diagrams. Personal photographs, private media locations and the selected soundtrack remain in the local studio."
+          ]
+        }
+      ],
+      "results": [
+        "A functioning local editor connects brief, plan, revision and native output.",
+        "Both aspect ratios have recorded export verification.",
+        "A measured incremental revision reused fifteen of sixteen segments."
+      ],
+      "limitations": [
+        "The incremental result describes one recorded revision, not every editing workload.",
+        "Personal source media and music need their own publication rights review.",
+        "Planner quality remains a creative judgment; a successful render verifies technical output."
+      ],
+      "lessons": [
+        "The best unit of control is a decision you can inspect and keep. A renderer becomes much more useful when revisions have identity.",
+        "Technical checks and aesthetic judgment belong together. One establishes that the file works; the other asks whether the edit is worth watching."
+      ],
+      "sourceNote": "Source-checked against local release reports, edit identity records and output verification in October 2026. Diagram widths are schematic. Original travel media and music remain private."
+    },
+    {
+      "slug": "visual-data-foundry",
+      "title": "Visual Data Foundry",
+      "category": "Applied AI · Data engineering",
+      "status": "Implemented workflows",
+      "timeRange": "May–October 2026",
+      "summary": "Making image work recoverable, inspectable and worth keeping.",
+      "lead": "The image is only the visible end of the work. Behind it are prompts, queues, failures, quality decisions and the question of whether the right file actually arrived.",
+      "role": "Workflow design and hands-on implementation across generation, collection, review and delivery, with AI-assisted development and a small technical team.",
+      "tools": [
+        "Python",
+        "Structured JSON",
+        "Asynchronous image APIs",
+        "Image quality analysis",
+        "Perceptual deduplication",
+        "Vision-language models",
+        "Object storage"
+      ],
+      "contribution": [
+        "Built and refined structured prompt and parameter workflows alongside resumable batch tooling.",
+        "Worked on durable task records, provider partitioning, retry handling and the separation of submission from result retrieval.",
+        "Connected deterministic quality checks, visual review, provenance and delivery verification across related image workstreams.",
+        "Investigated failures at the stage where they occurred rather than treating a dashboard total as proof of completion."
+      ],
+      "problem": "At scale, a successful request says very little. It may refer to a queued job, an expiring result URL, a file with unexpected dimensions or an image that does not satisfy its intended use. Repeating the request can create a duplicate charge or a second output while the first job is still running. A useful system has to preserve both progress and the meaning of that progress.",
+      "approach": [
+        "Separate prepare, submit, fetch, finalize and monitor into explicit stages.",
+        "Claim a task atomically before sending it, and keep provider ownership distinct.",
+        "Persist enough state to resume incomplete work without resubmitting completed records.",
+        "Verify decoded files and actual dimensions, then apply the quality and review rules appropriate to the workstream.",
+        "Keep creation/search activity, accepted images and verified customer deliveries as distinct measures."
+      ],
+      "challenges": [
+        "Provider requests can fail repeatedly while previously submitted tasks still need fetching.",
+        "Remote result links can expire before local retrieval catches up.",
+        "Requested resolution can differ from the dimensions of the returned image.",
+        "A local storage limit can become a production constraint long before compute is exhausted.",
+        "Semantic quality cannot be inferred from a source label, a filename or a successful download."
+      ],
+      "architecture": [
+        {
+          "title": "Define the work",
+          "description": "Structured themes and parameter records make the requested variation explicit before generation or collection begins."
+        },
+        {
+          "title": "Queue and recover",
+          "description": "Durable records separate task ownership, submission, pending work, retrieval and finalization."
+        },
+        {
+          "title": "Inspect the actual file",
+          "description": "Decode, measure, hash and review the resulting image. Acceptance rules differ between generated-image and collected-image contracts."
+        },
+        {
+          "title": "Preserve the decision",
+          "description": "Retain provenance and the relevant quality evidence so a later retry or delivery can be understood."
+        },
+        {
+          "title": "Verify the handover",
+          "description": "A deliverable is counted at its verified destination under the appropriate delivery contract, with intermediate stages recorded separately."
+        }
+      ],
+      "metrics": [
+        {
+          "label": "Creation and search scope",
+          "context": "Owner-reported scope across creation/search activity. This is distinct from generated images, accepted images and verified customer deliveries.",
+          "value": "Nearly 10M images"
+        }
+      ],
+      "sections": [
+        {
+          "title": "Two workloads, shared discipline",
+          "body": [
+            "Generation begins with a request for an image; collection begins with an existing source. I worked on both, and their acceptance rules differ. What they share is the need for recoverable state, clear identifiers and a record of the decision that moved an item forward. Keeping that distinction visible prevents a single large number from flattening several different kinds of work.",
+            "For generation, the batch runner keeps preparation, API submission, result retrieval and finalization separate. A pending task remains pending even when its input folder moves on. A completed record remains completed when an upload directory is temporarily unavailable. Those details make resuming a batch a state transition rather than a guess."
+          ]
+        },
+        {
+          "title": "Language becomes executable structure",
+          "body": [
+            "The prompt work was also a data-design problem. English and Chinese records need to stay aligned as subject pools change, and parameter choices need a defined responsibility. If a subject, a material and a composition instruction all try to control the same visual feature, the nominal combination count becomes misleading. The taxonomy and preview workflow helped expose that overlap before it became a large production run.",
+            "I worked through that boundary between authoring and execution: make the intended variation explicit, validate the record, preview the resulting prompt and use a bounded visual probe to inspect what the model actually does. The feedback then changes the authored structure. This gave language work an engineering loop without pretending that every visual judgment could be reduced to a validator. The code could check a missing translation or duplicate identifier; the review still had to decide whether the images were meaningfully different."
+          ]
+        },
+        {
+          "title": "Recovery is part of the design",
+          "body": [
+            "The scheduler has to make progress across themes instead of waiting indefinitely for one difficult prefix. I worked with rotating priority windows, disjoint provider lanes and checks on successful-plus-pending work before refilling a theme. This is a practical response to a familiar failure: sending more requests while enough remote jobs already exist to finish the work.",
+            "Finalization also has a precise role. It converts or stages the selected output, checks its identity and dimensions, and creates paired prompt metadata where the delivery contract requires it. Temporary formats and final deliverables carry different meanings. Cleanup follows recorded state so it can respect completed work."
+          ]
+        },
+        {
+          "title": "Quality has several kinds of evidence",
+          "body": [
+            "A deterministic check can establish that a file decodes, meets a dimension requirement or matches a known hash. It cannot decide whether an infographic contains the intended explanatory structure. Related collection workflows therefore combine code-based checks with image-specific visual-language review and explicit duplicate decisions.",
+            "I learned to treat review configuration as part of the evidence. A visual decision belongs to the image and the prompt version used to inspect it. That makes a changed requirement something the system can trace, rather than a silent reinterpretation of an old pass."
+          ]
+        },
+        {
+          "title": "What I took from the work",
+          "body": [
+            "The most useful engineering question became: what exactly has been proved at this stage? A submitted request, a downloaded file, a quality pass and a verified delivery each answer a different question. The system is stronger when those boundaries are ordinary, visible parts of its state model."
+          ]
+        }
+      ],
+      "results": [
+        "Implemented reusable batch stages and durable recovery controls.",
+        "Established explicit separation between request success, file validation, semantic acceptance and verified delivery.",
+        "Built a body of practical tooling around visual production rather than a one-off generation script."
+      ],
+      "limitations": [
+        "Activity scope is owner-reported and is not an audited delivery total.",
+        "Provider behavior and acceptance requirements vary across workstreams.",
+        "Client assets, proprietary prompt libraries and exact delivery figures remain private."
+      ],
+      "lessons": [
+        "Model the evidence before optimizing the headline count.",
+        "A retry policy needs task ownership and remote-state awareness.",
+        "Storage, review and delivery are engineering stages in their own right."
+      ],
+      "sourceNote": "Based on dated local batch-runner source, taxonomy validation, collection quality tooling and production operating records from May–October 2026. The broader activity figure is owner-reported.",
+      "confidence": "high",
+      "exhibit": "ai-experiments"
+    },
+    {
+      "slug": "visual-taxonomy-lab",
+      "title": "Visual Taxonomy Lab",
+      "category": "Prompt systems · Visual research",
+      "status": "Implemented and audited workflows",
+      "timeRange": "May–July 2026",
+      "summary": "A taxonomy of pictures, rather than a long list of names.",
+      "lead": "Two categories can sound different and still produce almost the same image. That gap between language and visible form became the problem to solve.",
+      "role": "Bilingual group authoring and alignment, parameter-system development, validation and visual-probe review.",
+      "tools": [
+        "Python",
+        "JavaScript",
+        "JSON Schema",
+        "English/Chinese prompt systems",
+        "React",
+        "Vite",
+        "Visual audits"
+      ],
+      "contribution": [
+        "Authored and corrected bilingual subgroup records, with dated Git evidence of English/Chinese alignment work.",
+        "Worked on subject pools, subgroup-specific parameters and accepted/rejected registries.",
+        "Developed validation, merge, registration and prompt-preview workflows.",
+        "Used generated probes to investigate weak boundaries and mechanically implausible subjects."
+      ],
+      "problem": "A large prompt catalogue can offer apparent variety through synonyms, brand names or recolors while covering a narrow visual space. The taxonomy needed to express differences that survive generation: silhouette, construction, material, context and composition.",
+      "approach": [
+        "Audit category and subgroup boundaries before expanding parameter combinations.",
+        "Separate subject identity from material and presentation choices.",
+        "Require explicit object-pool boundaries and visual-variable axes.",
+        "Check schemas, prompt alignment, uniqueness and combination capacity.",
+        "Use generated visual probes to test what static validation cannot see."
+      ],
+      "challenges": [
+        "Different labels can overlap in image space.",
+        "A technically valid template can force every subject into the same composition.",
+        "Overly detailed internal mechanisms encourage invented structures.",
+        "English and Chinese pools can drift during repeated edits."
+      ],
+      "architecture": [
+        {
+          "title": "Define a visual boundary",
+          "description": "Describe what belongs in a subgroup and which near-duplicates belong elsewhere."
+        },
+        {
+          "title": "Build a parameter system",
+          "description": "Give subject pools and presentation choices distinct responsibilities."
+        },
+        {
+          "title": "Validate and preview",
+          "description": "Check schema and alignment, register the source and inspect its actual prompt output."
+        },
+        {
+          "title": "Probe and revise",
+          "description": "Generate a bounded visual sample, review failures and retain or retire the responsible subject family."
+        }
+      ],
+      "metrics": [],
+      "sections": [
+        {
+          "title": "The unit of variety",
+          "body": [
+            "I started treating a subgroup as a hypothesis about images. The hypothesis should survive a grid of outputs: can a viewer see different shapes, functions, materials or relationships, or only different words? This made overlap review more useful than simply counting categories.",
+            "The workflow moves from category to subgroup, through an entropy and boundary audit, then into a registry. Parameter generation follows that decision. Adding more downstream options cannot repair a weak subject boundary."
+          ]
+        },
+        {
+          "title": "Validation and judgment",
+          "body": [
+            "The structured system checks bilingual alignment, required fields, object-pool uniqueness and parameter independence. A preview turns those records into something a person can inspect before a larger run.",
+            "Visual probes then reveal another class of failure. A plausible sentence can encourage impossible hinges, exposed internal mechanisms or unfamiliar speculative devices. Review fed back into the accepted pool, including removing entire themes when a small wording repair would preserve the underlying problem."
+          ]
+        },
+        {
+          "title": "What changed in my thinking",
+          "body": [
+            "I became more interested in useful constraints than maximum combinations. A short parameter choice can leave the model room to depict an ordinary, intact subject; a heavy template can overpower it. The best taxonomy is a working agreement between language, code and visual judgment."
+          ]
+        }
+      ],
+      "results": [
+        "Implemented a registry-to-preview workflow with structured checks and visual review.",
+        "Preserved accepted, rejected and revised subject boundaries in dated audit artifacts.",
+        "Separated exported prompt counts from generated-image and delivery counts."
+      ],
+      "limitations": [
+        "Client-correlated counts, proprietary templates and generated samples remain private.",
+        "Static validity does not establish visual diversity."
+      ],
+      "lessons": [
+        "Audit the subject boundary before multiplying options.",
+        "Visual probes test a different claim from schema validation.",
+        "Bilingual alignment is part of maintaining the system."
+      ],
+      "sourceNote": "Based on May 2026 bilingual Git changes, June registry audits and July 2026 parameter, preview and visual-validation records. Public examples should be newly authored rather than copied from confidential prompt libraries.",
+      "confidence": "high",
+      "exhibit": "ai-experiments"
+    }
+  ],
+  "notes": [
+    {
+      "slug": "a-better-average",
+      "title": "Beyond a better average",
+      "summary": "A research result can improve overall and still reveal a failure that changes what should happen next.",
+      "date": "2026-10-25",
+      "tags": [
+        "Research",
+        "Evaluation"
+      ],
+      "body": [
+        "The frozen CT comparison in PanSegAI improved both mean overlap and boundary distance after Soft Attachment. Those averages mattered. They gave us a fixed comparison using the same predictions and a cohort whose identity stayed stable.",
+        "The safety review mattered for a different reason. It found harmful removal of genuine tissue. A better mean could not answer whether an individual change was appropriate, and the failure exposed a limit in the available signal.",
+        "The resulting question became more useful than “did the score go up?” Which components were removed? What evidence supported that decision? Could a reviewer identify uncertainty before accepting the change?",
+        "This is why the case keeps the negative finding next to the aggregate chart. Research is stronger when the result and its boundary can be read together. A locked, unseen validation study and review-first behavior are the next questions, not conclusions hidden inside the original metric."
+      ]
+    },
+    {
+      "slug": "what-a-count-means",
+      "title": "What a count means",
+      "summary": "A large number becomes useful when you can say what entered it, what left it, and what survived the checks.",
+      "date": "2026-10-25",
+      "tags": [
+        "Images",
+        "Systems",
+        "Evidence"
+      ],
+      "body": [
+        "In a visual-data workflow, several numbers can all be correct and still describe different things. There are tasks requested, images decoded, items passing a quality gate, unique items after duplicate checks, and objects whose storage has been verified. Moving between those meanings silently is where a reassuring dashboard becomes misleading.",
+        "The systems I work on give those stages separate identities. An image-specific review answers a different question from a successful download. A manifest answers a different question from a completed model request. A source name cannot stand in for looking at the actual image.",
+        "This changes how I think about scale. A larger queue is sometimes progress and sometimes a warning that the next stage is blocked. A good number is one whose denominator and state are visible.",
+        "That is also a design problem. If a person has to interpret the interface before they can interpret the work, the system is asking them to carry an unnecessary uncertainty. Clear states are part of the engineering."
+      ]
+    }
+  ],
+  "timeline": [
+    {
+      "id": "aesthetic",
+      "date": "2026-07 – 2026-08",
+      "title": "Looking at the actual image",
+      "description": "Collection and quality-review tooling connects deterministic checks, VLM decisions and duplicate provenance.",
+      "kind": "Making",
+      "projectSlug": "aesthetic-image-curator",
+      "precision": "month"
+    },
+    {
+      "id": "atlas",
+      "date": "2026-10",
+      "title": "A private workspace, a public museum",
+      "description": "Atlas Careers and Travel Reel Studio join a growing collection of tools, experiments and project records.",
+      "kind": "Making",
+      "projectSlug": "atlas-careers",
+      "precision": "month"
+    },
+    {
+      "id": "cloudsway",
+      "date": "2025-12 – 2026-02",
+      "title": "Multimodal workflows",
+      "description": "AI engineering internship at Cloudsway Technology, building image-generation, speech-to-text and presentation workflows.",
+      "kind": "Work",
+      "precision": "month"
+    },
+    {
+      "id": "degree",
+      "date": "Expected 2026-12",
+      "title": "Finishing a semester ahead",
+      "description": "Finishing one semester ahead of my original schedule. Formal degree completion remains subject to the university’s confirmation.",
+      "kind": "Study",
+      "precision": "month"
+    },
+    {
+      "id": "egypt",
+      "date": "2025-07",
+      "title": "Egypt",
+      "description": "A confirmed country-level footprint, shared for this collection. Photographs and stories can follow after review.",
+      "kind": "Places",
+      "countryCode": "EG",
+      "precision": "month"
+    },
+    {
+      "id": "elsewhere",
+      "date": "2026-05",
+      "title": "Elsewhere Archive",
+      "description": "A research-translation prototype about migration, international student experience and approachable navigation.",
+      "kind": "Study",
+      "projectSlug": "elsewhere-archive",
+      "precision": "month"
+    },
+    {
+      "id": "infographic",
+      "date": "2026-09 – 2026-10",
+      "title": "Evidence at every stage",
+      "description": "Long-running visual and web-data workflows make acceptance, recovery and verified delivery explicit.",
+      "kind": "Making",
+      "projectSlug": "infographic-evidence-pipeline",
+      "precision": "month"
+    },
+    {
+      "id": "panseg",
+      "date": "2026-08 – 2026-10",
+      "title": "PanSegAI",
+      "description": "Team capstone work on baselines, training, reproducible evaluation and the failures that averages can hide.",
+      "kind": "Making",
+      "projectSlug": "pansegai",
+      "precision": "month"
+    },
+    {
+      "id": "reexen",
+      "date": "2025-09 – 2025-11",
+      "title": "Working with speech data",
+      "description": "AI engineering internship at Reexen, including speech-data preparation, deployment and fine-tuning support.",
+      "kind": "Work",
+      "precision": "month"
+    },
+    {
+      "id": "study-start",
+      "date": "2024-07",
+      "title": "Two ways of looking",
+      "description": "Beginning a Bachelor of Arts at the University of Sydney, combining Computer Science and Digital Cultures.",
+      "kind": "Study",
+      "precision": "month"
+    },
+    {
+      "id": "tradish",
+      "date": "2025-09",
+      "title": "Tradish",
+      "description": "AI hackathon work connecting cultural recipe discovery with mobile interaction.",
+      "kind": "Making",
+      "projectSlug": "tradish",
+      "precision": "month"
+    },
+    {
+      "id": "ucl",
+      "date": "2026-06 – 2026-07",
+      "title": "Trade and migration",
+      "description": "University College London Summer School in International Trade and Migration.",
+      "kind": "Study",
+      "precision": "month"
+    },
+    {
+      "id": "visual-taxonomy",
+      "date": "2026-05 – 2026-07",
+      "title": "A map of visual possibilities",
+      "description": "Bilingual taxonomy definitions, parameter systems, validators and visual probes appear in the local source history.",
+      "kind": "Making",
+      "projectSlug": "visual-taxonomy-lab",
+      "precision": "month"
+    }
+  ]
+}

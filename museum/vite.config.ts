@@ -2,6 +2,7 @@ import { defineConfig } from "vite";
 import { mkdirSync, copyFileSync, readFileSync, writeFileSync } from "node:fs";
 import { exhibits } from "./src/data/exhibits";
 import { site } from "./src/data/site.config";
+import { contentRoutes } from "./src/content";
 const escape = (s: string) =>
   s
     .replace(/&/g, "&amp;")
@@ -32,6 +33,7 @@ export default defineConfig({
             title: "Contact Yinan Feng",
             description: "CV, email and GitHub for Yinan Feng.",
           },
+          ...contentRoutes,
           ...exhibits.map((e) => ({
             path: "exhibit/" + e.slug,
             title: e.title,
